@@ -28,6 +28,7 @@ const App = () => {
 
     const [isAddComment, setIsAddComment] = useState(false)
     const [isEditComment, setIsEditComment] = useState(false)
+    const [isShowComments, setIsShowComments] = useState(false)
 
     // should put setIsEditComment(false) and setEditCommentInput("") everywhere!
 
@@ -709,6 +710,8 @@ const App = () => {
         } else if (name === "edit-comment") {
             setIsEditComment(true)
             setEditCommentInput(selectedComment.commentText)
+        } else if (name === "show-comments") {
+            setIsShowComments(prevIsShowComments => !prevIsShowComments)
         }
     }
 
@@ -816,7 +819,14 @@ const App = () => {
                                                 <div><p>Added By: {selectedBook.added_by}</p></div>
                                                 <div><p>Added On: {selectedBook.added_on}</p></div>
                                                 <div><p>Updated On: {selectedBook.updated_on}</p></div>
-                                                <div><p>{selectedBook.commentcount} comment{selectedBook.commentcount > 1 ? "s" : ""}</p></div>
+                                                <div>
+                                                    <p>{selectedBook.commentcount} comment{selectedBook.commentcount > 1 ? "s" : ""}</p>
+                                                    {
+                                                        selectedBook.commentcount && (
+                                                            <button name="show-comments" onClick={handleClick}>{isShowComments ? "hide " : "show "}comments</button>
+                                                        )
+                                                    }
+                                                </div>
                                             </div>
 
                                             <div className="btn-part">
@@ -837,7 +847,7 @@ const App = () => {
 
 
                                             {
-                                                selectedBook.commentcount && (
+                                                selectedBook.commentcount && isShowComments && (
                                                     <div className="comment-list">
                                                         <ul>
                                                             {
