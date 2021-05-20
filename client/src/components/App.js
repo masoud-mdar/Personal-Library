@@ -799,14 +799,7 @@ const App = () => {
                                         </div>
                                     )
                                 }
-
-
-
                             </div>
-
-
-
-
                         </div>
 
 
@@ -835,10 +828,11 @@ const App = () => {
                                 {
                                     isAddNewBook && (
                                         <div className="add-new-book">
+                                            <button name="close" onClick={handleClick} className="btn close">X</button>
                                             <input name="new-book-title" onChange={handleChange} value={newBTitleInput} placeholder="New book title..."></input>
                                             <input name="new-book-author" onChange={handleChange} value={newBAuthorInput} placeholder= "new book author..."></input>
                                             <button name="new-book-submit" onClick={handleClick} className="new-book-submit">Submit</button>
-                                            <button name="close" onClick={handleClick} className="btn close">X</button>
+                                            
                                         </div>
                                     )
                                 }

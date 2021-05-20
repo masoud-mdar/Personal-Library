@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+input {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
 input:focus {
     outline: none;
 }
@@ -139,6 +144,7 @@ input::placeholder {
 }
 
 .book-info .more-details .top-part .info-part {
+    position: relative;
     width: 60vw;
     height: 45vh;
     padding: 15px;
@@ -368,7 +374,8 @@ input::placeholder {
 }
 
 .add-new-comment input, .edit-comment input, .add-new-book input {
-    height: 15vh;
+    height: 10vh;
+    margin-top: 25px;
     padding: 5px;
     background-color: #2b3034;
     border: none;
@@ -426,6 +433,16 @@ input::placeholder {
 
 .close {
     position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1px;
+    width: 3vh;
+    height: 3vh;
+    margin: 5px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: orange;
 }
 
 
