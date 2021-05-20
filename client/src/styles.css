@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+input:focus {
+    outline: none;
+}
+
+input::placeholder {
+    color: #fafafa;
+    font-size: large;
+}
+
 .nav-bar {
     width: 100vw;
     height: 10vh;
@@ -344,6 +353,77 @@
     font-weight: bold;
 }
 
+.add-new-comment, .edit-comment, .add-new-book {
+    position: absolute;
+    top: 5%;
+    width: 45vw;
+    height: 35vh;
+    padding: 0 10px;
+    background-color: rgb(25,25,25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.add-new-comment input, .edit-comment input, .add-new-book input {
+    height: 15vh;
+    padding: 5px;
+    background-color: #2b3034;
+    border: none;
+    border-radius: 5px;
+    color: #fafafa;
+}
+
+.add-new-comment .submit-new-comment, .edit-comment .submit-new-comment, .add-new-book .new-book-submit {
+    height: 10vh;
+    border: none;
+    border-radius: 5px;
+    background-color: #00ff93;
+    color: #fafafa;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.surely-delete {
+    width: 65vw;
+    height: 35vh;
+    position: absolute;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 3px solid crimson;
+    border-radius: 5px;
+    background-color: rgb(25,25,25);
+    color: #fafafa;
+    z-index: 1;
+}
+
+.surely-delete button {
+    width: 35vw;
+    height: 10vh;
+    border: none;
+    border-radius: 5px;
+    color: #fafafa;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.surely-delete .yes {
+    background-color: crimson;
+}
+.surely-delete .no {
+    background-color: #00ff93;
+}
+
+.add-new-book {
+    top: 15%;
+    height: 50vh;
+}
+
 .close {
     position: absolute;
 }
@@ -356,7 +436,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #00272c; 
+    background: rgb(25,25,25); 
 }
  
 /* Handle */

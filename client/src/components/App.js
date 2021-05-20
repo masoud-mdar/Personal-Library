@@ -128,6 +128,8 @@ const App = () => {
 
         } else if (name === "add-new-book") {
             setIsAddNewBook(prevIsAddNewBook => !prevIsAddNewBook)
+            setIsAddComment(false)
+            setIsEditComment(false)
 
         } else if (name === "new-book-submit") {
             setIsLoading(true)
@@ -135,6 +137,7 @@ const App = () => {
             setIsSurelyDelete(false)
             setIsSurelyDelBook(false)
             setIsAddComment(false)
+            setIsEditComment(false)
             setCommentMoreDetails(false)
             setIsAddNewBook(false)
 
@@ -191,12 +194,15 @@ const App = () => {
 
         } else if (name === "delete-all") {
             setIsSurelyDelete(true)
+            setIsEditComment(false)
+            setIsAddNewBook(false)
         } else if (name === "no-sure-del") {
             setIsSurelyDelete(false)
             setIsSurelyDelBook(false)
             setIsSurelyDelComment(false)
         } else if (name === "surely-delete") {
             setIsLoading(true)
+            setIsAddNewBook(false)
 
             if (isSurelyDelBook) {
 
@@ -217,6 +223,8 @@ const App = () => {
                     setSelectedBookId("")
                     setMoreDetails(false)
                     setCommentMoreDetails(false)
+                    setIsAddComment(false)
+                    setIsEditComment(false)
                     setIsLoading(false)
     
                 })
@@ -261,6 +269,8 @@ const App = () => {
                         setSelectedBookId(data._id)
                         setSelectedBookComments(data.comments)
 
+                        setIsAddComment(false)
+                        setIsEditComment(false)
                         setIsSurelyDelComment(false)
                         setIsSurelyDelete(false)
                         setIsLoading(false)
@@ -290,6 +300,8 @@ const App = () => {
                     setSelectedBookId("")
                     setMoreDetails(false)
                     setCommentMoreDetails(false)
+                    setIsAddComment(false)
+                    setIsEditComment(false)
                     setIsLoading(false)
     
                 })
@@ -302,6 +314,7 @@ const App = () => {
             setIsLoading(true)
             setIsSurelyDelete(false)
             setIsSurelyDelBook(false)
+            setIsAddNewBook(false)
             
 
             axios.get(`${BASE_URL}/api/books/${id}`).then(response => {
@@ -317,6 +330,8 @@ const App = () => {
                     setSelectedBookComments(data.comments)
                     setSelectedBookId(data._id)
                     setCommentMoreDetails(false)
+                    setIsAddComment(false)
+                    setIsEditComment(false)
                     setMoreDetails(true)
                 }
                 
@@ -331,6 +346,7 @@ const App = () => {
         } else if (name === "add-comment") {
             console.log(id)
             setIsAddComment(true)
+            setIsAddNewBook(false)
             setCommentMoreDetails(false)
             setIsSurelyDelete(false)
             setIsSurelyDelBook(false)
@@ -382,7 +398,9 @@ const App = () => {
                         setSelectedBookComments(data.comments)
                         setMoreDetails(true)
                         setSelectedComment(data.comments[data.comments.length-1])
+                        setSelectedCommentId(data.comments[data.comments.length-1].commentId)
                         setCommentMoreDetails(true)
+                        setIsShowComments(true)
                         setIsLoading(false)
                     }
                 })
@@ -473,9 +491,13 @@ const App = () => {
             setIsSurelyDelete(true)
             setIsSurelyDelBook(true)
             setIsAddComment(false)
+            setIsEditComment(false)
+            setIsAddNewBook(false)
 
         } else if (name === "comment-more-details") {
             setIsAddComment(false)
+            setIsEditComment(false)
+            setIsAddNewBook(false)
 
             setCommentMoreDetails(prevCommentMoreDetails => !prevCommentMoreDetails)
             setSelectedCommentId(id)
@@ -500,6 +522,8 @@ const App = () => {
 
         } else if (name === "agree") {
             setIsAddComment(false)
+            setIsEditComment(false)
+            setIsAddNewBook(false)
             
 
             // axios.put for updating comment
@@ -606,6 +630,8 @@ const App = () => {
 
         } else if (name === "disagree") {
             setIsAddComment(false)
+            setIsEditComment(false)
+            setIsAddNewBook(false)
 
 
             let tempCommentArr = {
@@ -708,16 +734,21 @@ const App = () => {
             setIsSurelyDelComment(true)
 
             setIsAddComment(false)
+            setIsEditComment(false)
+            setIsAddNewBook(false)
             setIsSurelyDelBook(false)
             setIsSurelyDelete(true)
         } else if (name === "edit-comment") {
             setIsEditComment(true)
             setIsAddComment(false)
+            setIsAddNewBook(false)
             setEditCommentInput(selectedComment.commentText)
         } else if (name === "show-comments") {
             setIsShowComments(prevIsShowComments => !prevIsShowComments)
             setCommentMoreDetails(false)
             setIsAddComment(false)
+            setIsEditComment(false)
+            setIsAddNewBook(false)
         }
     }
 
@@ -769,16 +800,7 @@ const App = () => {
                                     )
                                 }
 
-                                {
-                                    isAddNewBook && (
-                                        <div className="add-new-book">
-                                            <input name="new-book-title" onChange={handleChange} value={newBTitleInput} placeholder="New book title..."></input>
-                                            <input name="new-book-author" onChange={handleChange} value={newBAuthorInput} placeholder= "new book author..."></input>
-                                            <button name="new-book-submit" onClick={handleClick}>Submit</button>
-                                            <button name="close" onClick={handleClick}>X</button>
-                                        </div>
-                                    )
-                                }
+
 
                             </div>
 
@@ -804,13 +826,23 @@ const App = () => {
                                             )
                                         }
                                         
-                                        <button name="surely-delete" onClick={handleClick}>Yes</button>
-                                        <button name="no-sure-del" onClick={handleClick}>No</button>
+                                        <button name="surely-delete" onClick={handleClick} className="btn yes">Yes</button>
+                                        <button name="no-sure-del" onClick={handleClick} className="btn no">No</button>
                                     </div>
                                 )
                             }
 
-                            <br />
+                                {
+                                    isAddNewBook && (
+                                        <div className="add-new-book">
+                                            <input name="new-book-title" onChange={handleChange} value={newBTitleInput} placeholder="New book title..."></input>
+                                            <input name="new-book-author" onChange={handleChange} value={newBAuthorInput} placeholder= "new book author..."></input>
+                                            <button name="new-book-submit" onClick={handleClick} className="new-book-submit">Submit</button>
+                                            <button name="close" onClick={handleClick} className="btn close">X</button>
+                                        </div>
+                                    )
+                                }
+
 
                             {
                                 moreDetails && (
@@ -828,12 +860,32 @@ const App = () => {
                                                 <div className=" div comment-part">
                                                     <p>{selectedBook.commentcount} comment{selectedBook.commentcount > 1 ? "s" : ""}</p>
                                                     {
-                                                        selectedBook.commentcount && (
+                                                        selectedBook.commentcount > 0 && (
                                                             <button name="show-comments" onClick={handleClick} className="btn show-comments-btn">{isShowComments ? "hide " : "show "}comments</button>
                                                         )
                                                     }
                                                 </div>
                                             </div>
+
+                                            {
+                                                isAddComment && (
+                                                    <div className="add-new-comment">
+                                                        <input name="new-comment" onChange={handleChange} value={newCommentInput} placeholder="Add a new comment..."></input>
+                                                        <button name="submit-new-comment" id={selectedBook._id} onClick={handleClick} className="submit-new-comment">Submit</button>
+                                                        <button name="close" onClick={handleClick} className="btn close">X</button>
+                                                    </div>
+                                                )
+                                            }
+
+                                            {
+                                                isEditComment && (
+                                                    <div className="edit-comment">
+                                                        <input name="edit-comment" onChange={handleChange} value={editCommentInput}></input>
+                                                        <button name="submit-new-comment" id={selectedBook._id} onClick={handleClick} className="submit-new-comment">Submit</button>
+                                                        <button name="close" onClick={handleClick} className="close">X</button>
+                                                    </div>
+                                                )
+                                            }
 
                                             {
                                                 commentMoreDetails && (
@@ -907,7 +959,7 @@ const App = () => {
 
 
                                             {
-                                                selectedBook.commentcount && isShowComments && (
+                                                selectedBook.commentcount > 0 && isShowComments && (
                                                     <div className="comment-list">
                                                         <ul>
                                                             {
@@ -924,25 +976,8 @@ const App = () => {
                                                 )
                                             }
 
-                                            {
-                                                isAddComment && (
-                                                    <div className="add-new-comment">
-                                                        <input name="new-comment" onChange={handleChange} value={newCommentInput} placeholder="Add a new comment..."></input>
-                                                        <button name="submit-new-comment" id={selectedBook._id} onClick={handleClick}>Submit</button>
-                                                        <button name="close" onClick={handleClick}>X</button>
-                                                    </div>
-                                                )
-                                            }
 
-                                            {
-                                                isEditComment && (
-                                                    <div className="edit-comment">
-                                                        <input name="edit-comment" onChange={handleChange} value={editCommentInput}></input>
-                                                        <button name="submit-new-comment" id={selectedBook._id} onClick={handleClick}>Submit</button>
-                                                        <button name="close" onClick={handleClick}>X</button>
-                                                    </div>
-                                                )
-                                            }
+
 
 
 
