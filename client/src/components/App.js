@@ -331,6 +331,7 @@ const App = () => {
         } else if (name === "add-comment") {
             console.log(id)
             setIsAddComment(true)
+            setCommentMoreDetails(false)
             setIsSurelyDelete(false)
             setIsSurelyDelBook(false)
         } else if (name === "submit-new-comment") {
@@ -456,6 +457,7 @@ const App = () => {
                         setCommentMoreDetails(true)
                         setSelectedComment(tempArr[0])
                         setIsEditComment(false)
+                        setIsAddComment(false)
                         setIsLoading(false)
                     })
                     
@@ -473,8 +475,9 @@ const App = () => {
             setIsAddComment(false)
 
         } else if (name === "comment-more-details") {
+            setIsAddComment(false)
 
-            setCommentMoreDetails(true)
+            setCommentMoreDetails(prevCommentMoreDetails => !prevCommentMoreDetails)
             setSelectedCommentId(id)
 
             console.log(selectedBookComments)
@@ -496,7 +499,8 @@ const App = () => {
             setIsSurelyDelBook(false)
 
         } else if (name === "agree") {
-            setIsLoading(true)
+            setIsAddComment(false)
+            
 
             // axios.put for updating comment
 
@@ -592,7 +596,6 @@ const App = () => {
                     setSelectedBookComments(data.comments)
                     setCommentMoreDetails(true)
                     setSelectedComment(tempArr[0])
-                    setIsLoading(false)
                 })
                 
 
@@ -602,8 +605,8 @@ const App = () => {
             //console.log(tempCommentArr)
 
         } else if (name === "disagree") {
+            setIsAddComment(false)
 
-            setIsLoading(true)
 
             let tempCommentArr = {
                 commentText: selectedComment.commentText,
@@ -692,7 +695,6 @@ const App = () => {
                     setSelectedBookComments(data.comments)
                     setCommentMoreDetails(true)
                     setSelectedComment(tempArr[0])
-                    setIsLoading(false)
                 })
                 
 
@@ -705,13 +707,17 @@ const App = () => {
             setSelectedCommentId(id)
             setIsSurelyDelComment(true)
 
+            setIsAddComment(false)
             setIsSurelyDelBook(false)
             setIsSurelyDelete(true)
         } else if (name === "edit-comment") {
             setIsEditComment(true)
+            setIsAddComment(false)
             setEditCommentInput(selectedComment.commentText)
         } else if (name === "show-comments") {
             setIsShowComments(prevIsShowComments => !prevIsShowComments)
+            setCommentMoreDetails(false)
+            setIsAddComment(false)
         }
     }
 
@@ -813,21 +819,75 @@ const App = () => {
                                         <div className="top-part">
 
                                             <div className="info-part">
-                                            <button name="close" onClick={handleClick} className="btn close">X</button>
-                                                <div><p>Title: {selectedBook.title}</p></div>
-                                                <div><p>Author: {selectedBook.author}</p></div>
-                                                <div><p>Added By: {selectedBook.added_by}</p></div>
-                                                <div><p>Added On: {selectedBook.added_on}</p></div>
-                                                <div><p>Updated On: {selectedBook.updated_on}</p></div>
-                                                <div>
+                                                <button name="close" onClick={handleClick} className="btn close">X</button>
+                                                <div className="div"><p>Title: {selectedBook.title}</p></div>
+                                                <div className="div"><p>Author: {selectedBook.author}</p></div>
+                                                <div className="div"><p>Added By: {selectedBook.added_by}</p></div>
+                                                <div className="div"><p>Added On: {selectedBook.added_on}</p></div>
+                                                <div className="div"><p>Updated On: {selectedBook.updated_on}</p></div>
+                                                <div className=" div comment-part">
                                                     <p>{selectedBook.commentcount} comment{selectedBook.commentcount > 1 ? "s" : ""}</p>
                                                     {
                                                         selectedBook.commentcount && (
-                                                            <button name="show-comments" onClick={handleClick}>{isShowComments ? "hide " : "show "}comments</button>
+                                                            <button name="show-comments" onClick={handleClick} className="btn show-comments-btn">{isShowComments ? "hide " : "show "}comments</button>
                                                         )
                                                     }
                                                 </div>
                                             </div>
+
+                                            {
+                                                commentMoreDetails && (
+                                                    <div className="comment-more-details">
+                                                        {/*<button name="close" onClick={handleClick} className="btn close">X</button>*/}
+
+                                                        <div className="text"><p>{selectedComment.commentText}</p></div>
+                                                        <div className="author"><p>By "{selectedComment.commentAuthor}"</p></div>
+                                                            
+
+                                                        <div className="comment-btn-part">
+
+                                                            <div className="comment-info">
+                                                                
+                                                                <span className="like-unlike-wrapper">
+                                                                    <span className="like">
+                                                                        <p>{selectedComment.agreed_by}</p>
+                                                                        <button name="agree" onClick={handleClick} className="agree-btn" style={{backgroundColor: selectedComment.agreed_by_me ? "#00ff93" : "#202529"}}>Agree</button>
+                                                                    </span>
+
+                                                                
+                                                                </span>
+
+                                                                <span className="like-unlike-wrapper">
+                                                                    <span className="unlike">
+                                                                        <p>{selectedComment.disagreed_by}</p>
+                                                                        <button name="disagree" onClick={handleClick} className="disagree-btn" style={{backgroundColor: selectedComment.disagreed_by_me ? "#00ff93" : "#202529"}}>Disagree</button>
+                                                                    </span>
+
+                                                                </span>
+                                                            </div>
+
+                                                            <div className="buttons">
+
+                                                                {
+                                                                    selectedBook.added_by === user || selectedComment.commentAuthor === user ? (
+                                                                        <button name="delete-comment" id={selectedComment.commentId} onClick={handleClick}>Delete Comment</button>
+                                                                    ) : (
+                                                                        <div></div>
+                                                                    )
+
+                                                                }
+                                                                {
+                                                                    selectedComment.commentAuthor === user && (
+                                                                        <button name="edit-comment" id={selectedComment.commentId} onClick={handleClick}>Edit Comment</button>
+                                                                    )
+                                                                }
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                    </div>
+                                                )
+                                            }
 
                                             <div className="btn-part">
                                                 <button name="add-comment" id={selectedBook._id} onClick={handleClick} className="btn add-comment-btn">Add a comment</button>
@@ -843,7 +903,7 @@ const App = () => {
 
 
 
-                                        <div className="bottom-part">
+                                        <div className="bottom-part" style={{display: isShowComments ? "flex" : "none" }}>
 
 
                                             {
@@ -854,7 +914,7 @@ const App = () => {
                                                                 selectedBookComments.map(comment => {
                                                                     return (
                                                                         <li key={Math.random() * Math.random()}>
-                                                                            <button name="comment-more-details" id={comment.commentId} onClick={handleClick}>{comment.commentText}</button>
+                                                                            <button name="comment-more-details" id={comment.commentId} onClick={handleClick} className="btn comment">{comment.commentText}</button>
                                                                         </li>
                                                                     )
                                                                 })
@@ -884,32 +944,7 @@ const App = () => {
                                                 )
                                             }
 
-                                            {
-                                                commentMoreDetails && (
-                                                    <div className="comment-more-details">
-                                                        <p>Comment: {selectedComment.commentText}</p>
-                                                        <p>By: {selectedComment.commentAuthor}</p>
-                                                        <p>agreed by: {selectedComment.agreed_by}</p>
-                                                        <p>disagreed by: {selectedComment.disagreed_by}</p>
-                                                        <button name="agree" onClick={handleClick}>Agree</button>
-                                                        <button name="disagree" onClick={handleClick}>Disagree</button>
-                                                        {
-                                                            selectedBook.added_by === user || selectedComment.commentAuthor === user ? (
-                                                                <button name="delete-comment" id={selectedComment.commentId} onClick={handleClick}>Delete Comment</button>
-                                                            ) : (
-                                                                <div></div>
-                                                            )
 
-                                                        }
-                                                        {
-                                                            selectedComment.commentAuthor === user && (
-                                                                <button name="edit-comment" id={selectedComment.commentId} onClick={handleClick}>Edit Comment</button>
-                                                            )
-                                                        }
-                                                        
-                                                    </div>
-                                                )
-                                            }
 
 
 
