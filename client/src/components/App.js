@@ -1,6 +1,20 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
 
+import Navbar from "./Navbar"
+import AllBookButton from "./AllBookButton"
+import EmptyBookList from "./EmptyBookList"
+import AllBooksList from "./AllBooksList"
+import Delete from "./Delete"
+import AddNewBook from "./AddNewBook"
+import BookInfoPart from "./BookInfoPart"
+import AddComment from "./AddComment"
+import EditComment from "./EditComment"
+import CommentMoreDetails from "./CommentMoreDetails"
+import CommentButtons from "./CommentButtons"
+import CommentBottomPart from "./CommentBottomPart"
+import Loading from "./Loading"
+
 const BASE_URL = "http://localhost:5000"
 const user = "demoUser"
 
@@ -757,48 +771,38 @@ const App = () => {
     // agree, disagree system: add an ID for each comment, add agreed by, disagreed by for each comment
     return (
         <div>
-            <div className="nav-bar"></div>
+            <Navbar />
             {
                 !isLoading ? (
                     <div className="container">
 
                         <div className="all-books">
-                            <div className="btn-part">
-                                <div className="add-book">
-                                    {/*<button name="all-books" onClick={handleClick} className="btn">Show me all</button>*/}
-                                    <button name="add-new-book" onClick={handleClick} className="btn add-book-btn">+</button>
-                                </div>
 
-                                <div className="delete-all">
-                                    <button name="delete-all" onClick={handleClick} className="btn del-book-btn">!</button>
-                                </div>
-                            </div>
+                            <AllBookButton 
+                                data = {{
+                                    handleClick: handleClick
+                                }}
+                            />
 
                             <div className="list-part">
 
                                 {
                                     !allBooksList.length ? (
-                                        <div className="empty-books-list">
-                                            <h2>
-                                                No book in here...
-                                            </h2>
-                                        </div>
+
+                                        <EmptyBookList />
+
                                     ) : (
-                                        <div className="all-books-list">
-                                            <ul>
-                                                {
-                                                    allBooksList.map(book => {
-                                                        return (
-                                                            <li key={Math.random() * Math.random()}>
-                                                                <button name="book-select" id={book._id} onClick={handleClick} className="btn book-select-btn">{book.title}</button>
-                                                            </li>
-                                                        )
-                                                    })
-                                                }
-                                            </ul>
-                                        </div>
+
+                                        <AllBooksList 
+                                            data = {{
+                                                handleClick: handleClick,
+                                                allBooksList: allBooksList
+                                            }}
+                                        />
+
                                     )
                                 }
+
                             </div>
                         </div>
 
@@ -808,32 +812,29 @@ const App = () => {
 
                             {
                                 isSurelyDelete && (
-                                    <div className="surely-delete">
-                                        {
-                                            !isSurelyDelBook && !isSurelyDelComment ? (
-                                                <h2>Are You sure you want to definitely Delete All the books?</h2>
-                                            ) : isSurelyDelBook && !isSurelyDelComment ? (
-                                                <h2>Are You sure you want to definitely Delete the {selectedBook.title} from the list?</h2>
-                                            ) : (
-                                                <h2>Are You sure you want to definitely Delete the comment?</h2>
-                                            )
-                                        }
-                                        
-                                        <button name="surely-delete" onClick={handleClick} className="btn yes">Yes</button>
-                                        <button name="no-sure-del" onClick={handleClick} className="btn no">No</button>
-                                    </div>
+
+                                    <Delete
+                                        data = {{
+                                            handleClick: handleClick,
+                                            isSurelyDelBook: isSurelyDelBook,
+                                            isSurelyDelComment: isSurelyDelComment,
+                                            selectedBook: selectedBook
+                                        }}
+                                    />
                                 )
                             }
 
                                 {
                                     isAddNewBook && (
-                                        <div className="add-new-book">
-                                            <button name="close" onClick={handleClick} className="btn close">X</button>
-                                            <input name="new-book-title" onChange={handleChange} value={newBTitleInput} placeholder="New book title..."></input>
-                                            <input name="new-book-author" onChange={handleChange} value={newBAuthorInput} placeholder= "new book author..."></input>
-                                            <button name="new-book-submit" onClick={handleClick} className="new-book-submit">Submit</button>
-                                            
-                                        </div>
+
+                                        <AddNewBook
+                                            data = {{
+                                                handleClick: handleClick,
+                                                handleChange: handleChange,
+                                                newBTitleInput: newBTitleInput,
+                                                newBAuthorInput: newBAuthorInput
+                                            }}
+                                        />
                                     )
                                 }
 
@@ -844,168 +845,81 @@ const App = () => {
 
                                         <div className="top-part">
 
-                                            <div className="info-part">
-                                                <button name="close" onClick={handleClick} className="btn close">X</button>
-                                                <div className="div"><p>Title: {selectedBook.title}</p></div>
-                                                <div className="div"><p>Author: {selectedBook.author}</p></div>
-                                                <div className="div"><p>Added By: {selectedBook.added_by}</p></div>
-                                                <div className="div"><p>Added On: {selectedBook.added_on}</p></div>
-                                                <div className="div"><p>Updated On: {selectedBook.updated_on}</p></div>
-                                                <div className=" div comment-part">
-                                                    <p>{selectedBook.commentcount} comment{selectedBook.commentcount > 1 ? "s" : ""}</p>
-                                                    {
-                                                        selectedBook.commentcount > 0 && (
-                                                            <button name="show-comments" onClick={handleClick} className="btn show-comments-btn">{isShowComments ? "hide " : "show "}comments</button>
-                                                        )
-                                                    }
-                                                </div>
-                                            </div>
+                                            <BookInfoPart
+                                                data = {{
+                                                    handleClick: handleClick,
+                                                    selectedBook: selectedBook,
+                                                    isShowComments: isShowComments
+                                                }}
+                                            />
 
                                             {
                                                 isAddComment && (
-                                                    <div className="add-new-comment">
-                                                        <input name="new-comment" onChange={handleChange} value={newCommentInput} placeholder="Add a new comment..."></input>
-                                                        <button name="submit-new-comment" id={selectedBook._id} onClick={handleClick} className="submit-new-comment">Submit</button>
-                                                        <button name="close" onClick={handleClick} className="btn close">X</button>
-                                                    </div>
+
+                                                    <AddComment
+                                                        data = {{
+                                                            handleClick: handleClick,
+                                                            handleChange: handleChange,
+                                                            newCommentInput: newCommentInput,
+                                                            selectedBook: selectedBook
+                                                        }}
+                                                    />
                                                 )
                                             }
 
                                             {
                                                 isEditComment && (
-                                                    <div className="edit-comment">
-                                                        <input name="edit-comment" onChange={handleChange} value={editCommentInput}></input>
-                                                        <button name="submit-new-comment" id={selectedBook._id} onClick={handleClick} className="submit-new-comment">Submit</button>
-                                                        <button name="close" onClick={handleClick} className="close">X</button>
-                                                    </div>
+
+                                                    <EditComment
+                                                        data = {{
+                                                            handleClick: handleClick,
+                                                            handleChange: handleChange,
+                                                            editCommentInput: editCommentInput,
+                                                            selectedBook: selectedBook
+                                                        }}
+                                                    />
                                                 )
                                             }
 
                                             {
                                                 commentMoreDetails && (
-                                                    <div className="comment-more-details">
-                                                        {/*<button name="close" onClick={handleClick} className="btn close">X</button>*/}
 
-                                                        <div className="text"><p>{selectedComment.commentText}</p></div>
-                                                        <div className="author"><p>By "{selectedComment.commentAuthor}"</p></div>
-                                                            
-
-                                                        <div className="comment-btn-part">
-
-                                                            <div className="comment-info">
-                                                                
-                                                                <span className="like-unlike-wrapper">
-                                                                    <span className="like">
-                                                                        <p>{selectedComment.agreed_by}</p>
-                                                                        <button name="agree" onClick={handleClick} className="agree-btn" style={{backgroundColor: selectedComment.agreed_by_me ? "#00ff93" : "#202529"}}>Agree</button>
-                                                                    </span>
-
-                                                                
-                                                                </span>
-
-                                                                <span className="like-unlike-wrapper">
-                                                                    <span className="unlike">
-                                                                        <p>{selectedComment.disagreed_by}</p>
-                                                                        <button name="disagree" onClick={handleClick} className="disagree-btn" style={{backgroundColor: selectedComment.disagreed_by_me ? "#00ff93" : "#202529"}}>Disagree</button>
-                                                                    </span>
-
-                                                                </span>
-                                                            </div>
-
-                                                            <div className="buttons">
-
-                                                                {
-                                                                    selectedBook.added_by === user || selectedComment.commentAuthor === user ? (
-                                                                        <button name="delete-comment" id={selectedComment.commentId} onClick={handleClick}>Delete Comment</button>
-                                                                    ) : (
-                                                                        <div></div>
-                                                                    )
-
-                                                                }
-                                                                {
-                                                                    selectedComment.commentAuthor === user && (
-                                                                        <button name="edit-comment" id={selectedComment.commentId} onClick={handleClick}>Edit Comment</button>
-                                                                    )
-                                                                }
-                                                            </div>
-
-                                                        </div>
-                                                        
-                                                    </div>
+                                                    <CommentMoreDetails
+                                                        data = {{
+                                                            handleClick: handleClick,
+                                                            user: user,
+                                                            selectedComment: selectedComment
+                                                        }}
+                                                    />
                                                 )
                                             }
 
-                                            <div className="btn-part">
-                                                <button name="add-comment" id={selectedBook._id} onClick={handleClick} className="btn add-comment-btn">Add a comment</button>
-                                                {
-                                                    selectedBook.added_by === user && (
-
-                                                        <button name="del-book" onClick={handleClick} className="btn del-book-btn">Delete Book</button>
-                                                    )
-                                                }
-                                                
-                                            </div>
-                                        </div>
-
-
-
-                                        <div className="bottom-part" style={{display: isShowComments ? "flex" : "none" }}>
-
-
-                                            {
-                                                selectedBook.commentcount > 0 && isShowComments && (
-                                                    <div className="comment-list">
-                                                        <ul>
-                                                            {
-                                                                selectedBookComments.map(comment => {
-                                                                    return (
-                                                                        <li key={Math.random() * Math.random()}>
-                                                                            <button name="comment-more-details" id={comment.commentId} onClick={handleClick} className="btn comment">{comment.commentText}</button>
-                                                                        </li>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                )
-                                            }
-
-
-
-
-
-
-
+                                            <CommentButtons
+                                                data = {{
+                                                    handleClick: handleClick,
+                                                    selectedBook: selectedBook,
+                                                    user: user
+                                                }}
+                                            />
 
                                         </div>
 
-
-
-
-
-
-
-
-
+                                        <CommentBottomPart
+                                            data = {{
+                                                handleClick: handleClick,
+                                                selectedBook: selectedBook,
+                                                isShowComments: isShowComments
+                                            }}
+                                        />
                                     </div>
                                 )
                             }
 
                         </div>
 
-
-
-
-
-
-
-
-
                     </div>
                 ) : (
-                    <div className="loading">
-                        <h1>Loading...</h1>
-                    </div>
+                    <Loading />
                 )
             }
 
