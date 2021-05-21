@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
+import swal from "sweetalert2"
 
 import Navbar from "./Navbar"
 import AllBookButton from "./AllBookButton"
@@ -78,15 +79,11 @@ const App = () => {
         axios.get(`${BASE_URL}/api/books`).then(response => {
             const {data} = response
 
-            if (data.hasOwnProperty("error")) {
-                console.log(data)
-            } else {
-                console.log(data.length)
-                let tempArr = data.map(book => {
-                    return {title: book.title, _id: book._id}
-                })
-                setAllBooksList(tempArr)
-            }
+            let tempArr = data.map(book => {
+                return {title: book.title, _id: book._id}
+            })
+            setAllBooksList(tempArr)
+            
             setIsLoading(false)
         })
     }, [])
@@ -97,16 +94,12 @@ const App = () => {
 
         axios.get(`${BASE_URL}/api/books`).then(response => {
             const {data} = response
-            console.log(data)
-            if (data.hasOwnProperty("error")) {
-                console.log(data)
-            } else {
-                console.log(data.length)
-                let tempArr = data.map(book => {
-                    return {title: book.title, _id: book._id}
-                })
-                setAllBooksList(tempArr)
-            }
+
+            let tempArr = data.map(book => {
+                return {title: book.title, _id: book._id}
+            })
+            setAllBooksList(tempArr)
+
             setIsLoading(false)
         })
     }, [count])
@@ -144,7 +137,7 @@ const App = () => {
                 newBookFunc(setIsAddNewBook, setIsAddComment, setIsEditComment)
                 break
             case "new-book-submit" :
-                submitNewBookFunc(setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput)
+                submitNewBookFunc(setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput, swal)
                 break
             case "delete-all" :
                 deleteAllFunc(setIsSurelyDelete, setIsEditComment, setIsAddNewBook)
@@ -153,7 +146,7 @@ const App = () => {
                 noSureDelFunc(setIsSurelyDelete, setIsSurelyDelBook, setIsSurelyDelComment)
                 break
             case "surely-delete" :
-                surelyDeleteFunc(setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment)
+                surelyDeleteFunc(setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment, selectedBook, swal)
                 break
             case "book-select" :
                 bookSelectFunc(id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails)
@@ -268,7 +261,7 @@ const App = () => {
                                                     isShowComments: isShowComments
                                                 }}
                                             />
-                                            
+
                                             {
                                                 isAddComment && (
 

@@ -1,4 +1,4 @@
-const submitNewBookFunc = (setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput) => {
+const submitNewBookFunc = (setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput, swal) => {
     setIsLoading(true)
 
     setIsSurelyDelete(false)
@@ -18,9 +18,13 @@ const submitNewBookFunc = (setSelectedBook, setSelectedBookComments, setSelected
         const {data} = response
 
         if (data.hasOwnProperty("error")) {
-            console.log(data)
+            swal.fire({
+                icon: "error",
+                title: "Error!",
+                text: `${data.error}`
+            })
         } else {
-            console.log(data)
+
             setNewBTitleInput("")
             setNewBTitleInput("")
             setNewBAuthorInput("")
@@ -30,18 +34,29 @@ const submitNewBookFunc = (setSelectedBook, setSelectedBookComments, setSelected
 
             axios.get(`${BASE_URL}/api/books/${data._id}`).then(response => {
                 const {data} = response
-                console.log(data)
 
                 if (data.hasOwnProperty("error")) {
-                    console.log(data)
+                    swal.fire({
+                        icon: "error",
+                        title: "Error!",
+                        text: `${data.error}`
+                    })
 
                 } else {
 
-                    setSelectedBook(data)
-                    setSelectedBookComments(data.comments)
-                    setSelectedBookId(data._id)
-                    setCommentMoreDetails(false)
-                    setMoreDetails(true)
+                    swal.fire(`${data.added_by}`, `The "${data.title}" written by "${data.author}" added successfully`, "success").then(
+                        (result) => {
+
+                          if (result.isConfirmed || result.isDismissed) {
+
+                            setSelectedBook(data)
+                            setSelectedBookComments(data.comments)
+                            setSelectedBookId(data._id)
+                            setCommentMoreDetails(false)
+                            setMoreDetails(true)
+                          }
+                        }
+                    )
                 }
 
                 setIsSurelyDelete(false)
@@ -52,7 +67,6 @@ const submitNewBookFunc = (setSelectedBook, setSelectedBookComments, setSelected
         }
 
         setCount(prevCount => prevCount +1)
-        //setIsLoading(false)
         
         
     })

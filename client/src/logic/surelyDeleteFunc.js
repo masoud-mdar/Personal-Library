@@ -1,4 +1,4 @@
-const surelyDeleteFunc = (setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment) => {
+const surelyDeleteFunc = (setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment, selectedBook, swal) => {
     setIsLoading(true)
     setIsAddNewBook(false)
 
@@ -8,21 +8,31 @@ const surelyDeleteFunc = (setIsLoading, setIsAddNewBook, isSurelyDelBook, axios,
             const {data} = response
 
             if (data.hasOwnProperty("error")) {
-                console.log(data)
+                swal.fire({
+                    icon: "error",
+                    title: "Error!",
+                    text: `${data.error}`
+                })
             } else {
-                console.log(data)
+                swal.fire(`${selectedBookId}`, `${selectedBook.title} deleted successfully`, "success").then(
+                    (result) => {
+                      if (result.isConfirmed || result.isDismissed) {
+
+                        setIsSurelyDelete(false)
+                        setIsSurelyDelBook(false)
+                        setCount(prevCount => prevCount + 1)
+                        setSelectedBook({})
+                        setSelectedBookComments([])
+                        setSelectedBookId("")
+                        setMoreDetails(false)
+                        setCommentMoreDetails(false)
+                        setIsAddComment(false)
+                        setIsEditComment(false)
+                      }
+                    }
+                )
             }
 
-            setIsSurelyDelete(false)
-            setIsSurelyDelBook(false)
-            setCount(prevCount => prevCount + 1)
-            setSelectedBook("")
-            setSelectedBookComments([])
-            setSelectedBookId("")
-            setMoreDetails(false)
-            setCommentMoreDetails(false)
-            setIsAddComment(false)
-            setIsEditComment(false)
             setIsLoading(false)
 
         })
