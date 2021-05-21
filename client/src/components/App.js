@@ -15,8 +15,9 @@ import CommentButtons from "./CommentButtons"
 import CommentBottomPart from "./CommentBottomPart"
 import Loading from "./Loading"
 
-const BASE_URL = "http://localhost:5000"
-const user = "demoUser"
+import {BASE_URL} from "../utils/constants"
+import {user} from "../utils/constants"
+
 
 const App = () => {
 
@@ -829,7 +830,7 @@ const App = () => {
 
         } else if (name === "show-comments") {
             showCommentsFunc()
-            
+
         }
     }
 
