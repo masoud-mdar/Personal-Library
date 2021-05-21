@@ -1,4 +1,4 @@
-const disagreeFunc = () => {
+const disagreeFunc = (setIsAddComment, setIsEditComment, setIsAddNewBook, selectedComment, user, selectedBookComments, selectedCommentId, setSelectedBook, setSelectedBookComments, setCommentMoreDetails, setSelectedComment, axios, BASE_URL, selectedBookId, setSelectedBookId) => {
     setIsAddComment(false)
     setIsEditComment(false)
     setIsAddNewBook(false)

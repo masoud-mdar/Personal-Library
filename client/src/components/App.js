@@ -27,6 +27,10 @@ import submitNewCommentFunc from "../logic/submitNewCommentFunc"
 import deleteBookFunc from "../logic/deleteBookFunc"
 import commentMoreDetailsFunc from "../logic/commentMoreDetailsFunc"
 import agreeFunc from "../logic/agreeFunc"
+import disagreeFunc from "../logic/disagreeFunc"
+import deleteCommentFunc from "../logic/deleteCommentFunc"
+import editCommentFunc from "../logic/editCommentFunc"
+import showCommentsFunc from "../logic/showCommentsFunc"
 
 import {BASE_URL} from "../utils/constants"
 import {user} from "../utils/constants"
@@ -62,17 +66,18 @@ const App = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [count, setCount] = useState(0)
-    //const [commentCounter, setCommentCounter] = useState(0)
 
     const [isSurelyDelete, setIsSurelyDelete] = useState(false)
     const [isSurelyDelBook, setIsSurelyDelBook] = useState(false)
     const [isSurelyDelComment, setIsSurelyDelComment] = useState(false)
 
     useEffect(() => {
+
         setIsLoading(true)
+
         axios.get(`${BASE_URL}/api/books`).then(response => {
             const {data} = response
-            console.log(data)
+
             if (data.hasOwnProperty("error")) {
                 console.log(data)
             } else {
@@ -80,19 +85,16 @@ const App = () => {
                 let tempArr = data.map(book => {
                     return {title: book.title, _id: book._id}
                 })
-
-
                 setAllBooksList(tempArr)
             }
-
             setIsLoading(false)
-
         })
-
     }, [])
 
     useEffect(() => {
+
         setIsLoading(true)
+
         axios.get(`${BASE_URL}/api/books`).then(response => {
             const {data} = response
             console.log(data)
@@ -103,18 +105,11 @@ const App = () => {
                 let tempArr = data.map(book => {
                     return {title: book.title, _id: book._id}
                 })
-
-
                 setAllBooksList(tempArr)
             }
-
             setIsLoading(false)
-
         })
-
     }, [count])
-
-
 
     const handleChange = (Event) => {
         const {name, value} = Event.target
@@ -136,91 +131,65 @@ const App = () => {
                 console.log(name)
                 break
         }
-
-    }
-
-
-
-    const deleteCommentFunc = (id) => {
-        setSelectedCommentId(id)
-        setIsSurelyDelComment(true)
-
-        setIsAddComment(false)
-        setIsEditComment(false)
-        setIsAddNewBook(false)
-        setIsSurelyDelBook(false)
-        setIsSurelyDelete(true)
-    }
-
-    const editCommentFunc = () => {
-        setIsEditComment(true)
-        setIsAddComment(false)
-        setIsAddNewBook(false)
-        setEditCommentInput(selectedComment.commentText)
-    }
-
-    const showCommentsFunc = () => {
-        setIsShowComments(prevIsShowComments => !prevIsShowComments)
-        setCommentMoreDetails(false)
-        setIsAddComment(false)
-        setIsEditComment(false)
-        setIsAddNewBook(false)
     }
 
     const handleClick = (Event) => {
         const {name, id} = Event.target
 
-        if (name === "all-books") {
-            allBooksFunc(setIsLoading, axios, BASE_URL, setAllBooksList)
-
-        } else if (name === "add-new-book") {
-            newBookFunc(setIsAddNewBook, setIsAddComment, setIsEditComment)
-
-        } else if (name === "new-book-submit") {
-            submitNewBookFunc(setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput)
-
-        } else if (name === "delete-all") {
-            deleteAllFunc(setIsSurelyDelete, setIsEditComment, setIsAddNewBook)
-
-        } else if (name === "no-sure-del") {
-            noSureDelFunc(setIsSurelyDelete, setIsSurelyDelBook, setIsSurelyDelComment)
-
-        } else if (name === "surely-delete") {
-            surelyDeleteFunc(setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment)
-
-        } else if (name === "book-select") {
-            bookSelectFunc(id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails)
-            
-        } else if (name === "add-comment") {
-            addCommentFunc(setIsAddComment, setIsAddNewBook, setCommentMoreDetails, setIsSurelyDelete, setIsSurelyDelBook)
-
-        } else if (name === "submit-new-comment") {
-            submitNewCommentFunc(setIsLoading, setIsEditComment, newCommentInput, user, axios, BASE_URL, selectedBookId, setIsAddComment, setCount, setNewCommentInput, setMoreDetails, setCommentMoreDetails, setSelectedBook, setSelectedBookComments, isEditComment, setSelectedComment, setSelectedCommentId, setIsShowComments, editCommentInput, selectedComment, selectedBookComments, selectedCommentId, setEditCommentInput, setSelectedBookId)
-
-        } else if (name === "del-book") {
-            deleteBookFunc(setIsSurelyDelete, setIsSurelyDelBook, setIsAddComment, setIsEditComment, setIsAddNewBook)
-
-        } else if (name === "comment-more-details") {
-            commentMoreDetailsFunc(id, setIsAddComment, setIsEditComment, setIsAddNewBook, setCommentMoreDetails, setSelectedCommentId, selectedBookComments, setSelectedComment, setIsSurelyDelete, setIsSurelyDelBook)
-
-        } else if (name === "agree") {
-            agreeFunc(setIsAddComment, setIsEditComment, setIsAddNewBook, selectedComment, user, selectedBookComments, selectedCommentId, setSelectedBook, setSelectedBookComments, setCommentMoreDetails, setSelectedComment, axios, BASE_URL, selectedBookId, setSelectedBookId)
-
-        } else if (name === "disagree") {
-            disagreeFunc()
-
-        } else if (name === "delete-comment") {
-            deleteCommentFunc(id)
-
-        } else if (name === "edit-comment") {
-            editCommentFunc()
-
-        } else if (name === "show-comments") {
-            showCommentsFunc()
-
+        switch (name) {
+            case "all-books" :
+                allBooksFunc(setIsLoading, axios, BASE_URL, setAllBooksList)
+                break
+            case "add-new-book" :
+                newBookFunc(setIsAddNewBook, setIsAddComment, setIsEditComment)
+                break
+            case "new-book-submit" :
+                submitNewBookFunc(setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput)
+                break
+            case "delete-all" :
+                deleteAllFunc(setIsSurelyDelete, setIsEditComment, setIsAddNewBook)
+                break
+            case "no-sure-del" :
+                noSureDelFunc(setIsSurelyDelete, setIsSurelyDelBook, setIsSurelyDelComment)
+                break
+            case "surely-delete" :
+                surelyDeleteFunc(setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment)
+                break
+            case "book-select" :
+                bookSelectFunc(id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails)
+                break
+            case "add-comment" :
+                addCommentFunc(setIsAddComment, setIsAddNewBook, setCommentMoreDetails, setIsSurelyDelete, setIsSurelyDelBook)
+                break
+            case "submit-new-comment" :
+                submitNewCommentFunc(setIsLoading, setIsEditComment, newCommentInput, user, axios, BASE_URL, selectedBookId, setIsAddComment, setCount, setNewCommentInput, setMoreDetails, setCommentMoreDetails, setSelectedBook, setSelectedBookComments, isEditComment, setSelectedComment, setSelectedCommentId, setIsShowComments, editCommentInput, selectedComment, selectedBookComments, selectedCommentId, setEditCommentInput, setSelectedBookId)
+                break
+            case "del-book" :
+                deleteBookFunc(setIsSurelyDelete, setIsSurelyDelBook, setIsAddComment, setIsEditComment, setIsAddNewBook)
+                break
+            case "comment-more-details" :
+                commentMoreDetailsFunc(id, setIsAddComment, setIsEditComment, setIsAddNewBook, setCommentMoreDetails, setSelectedCommentId, selectedBookComments, setSelectedComment, setIsSurelyDelete, setIsSurelyDelBook)
+                break
+            case "agree" :
+                agreeFunc(setIsAddComment, setIsEditComment, setIsAddNewBook, selectedComment, user, selectedBookComments, selectedCommentId, setSelectedBook, setSelectedBookComments, setCommentMoreDetails, setSelectedComment, axios, BASE_URL, selectedBookId, setSelectedBookId)
+                break
+            case "disagree" :
+                disagreeFunc(setIsAddComment, setIsEditComment, setIsAddNewBook, selectedComment, user, selectedBookComments, selectedCommentId, setSelectedBook, setSelectedBookComments, setCommentMoreDetails, setSelectedComment, axios, BASE_URL, selectedBookId, setSelectedBookId)
+                break
+            case "delete-comment" :
+                deleteCommentFunc(id, setSelectedCommentId, setIsSurelyDelComment, setIsAddComment, setIsEditComment, setIsAddNewBook, setIsSurelyDelBook, setIsSurelyDelete)
+                break
+            case "edit-comment" :
+                editCommentFunc(setIsEditComment, setIsAddComment, setIsAddNewBook, setEditCommentInput, selectedComment)
+                break
+            case "show-comments" :
+                showCommentsFunc(setIsShowComments, setCommentMoreDetails, setIsAddComment, setIsEditComment, setIsAddNewBook)
+                break
+            default :
+                console.log(name)
+                break
         }
     }
-
 
     return (
         <div>
@@ -238,7 +207,6 @@ const App = () => {
                             />
 
                             <div className="list-part">
-
                                 {
                                     !allBooksList.length ? (
 
@@ -259,10 +227,7 @@ const App = () => {
                             </div>
                         </div>
 
-
-
                         <div className="book-info">
-
                             {
                                 isSurelyDelete && (
 
@@ -290,8 +255,6 @@ const App = () => {
                                         />
                                     )
                                 }
-
-
                             {
                                 moreDetails && (
                                     <div className="more-details">
@@ -305,7 +268,7 @@ const App = () => {
                                                     isShowComments: isShowComments
                                                 }}
                                             />
-
+                                            
                                             {
                                                 isAddComment && (
 
