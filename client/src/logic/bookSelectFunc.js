@@ -1,8 +1,9 @@
-const bookSelectFunc = (id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails) => {
+const bookSelectFunc = (id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails, setIsShowComments) => {
     setIsLoading(true)
     setIsSurelyDelete(false)
     setIsSurelyDelBook(false)
     setIsAddNewBook(false)
+    setIsShowComments(false)
     
 
     axios.get(`${BASE_URL}/api/books/${id}`).then(response => {

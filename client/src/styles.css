@@ -69,7 +69,6 @@ input::placeholder {
     flex-direction: column;
     justify-content: space-evenly;
     border-right: 3px solid #002433;
-    overflow: auto;
 }
 
 .all-books .btn-part {
@@ -79,48 +78,14 @@ input::placeholder {
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    border: 1px solid blue;
-}
-.all-books .list-part {
-    width: 25vw;
-    height: 70vh;
-}
-
-.all-books .list-part .all-books-list{
-    width: 25vw;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    border: 5px solid green;
-}
-
-
-
-.all-books-list ul {
-    list-style: none;
-
-}
-
-.book-select-btn {
-    background-color: orange;
-    width: 20vw;
-    min-width: 100%;
-    margin-bottom: 1px;
-    padding: 15px 0;
-    border-radius: 3px;
-    color: #fafafa;
-    font-family: "KoHo";
-    font-size: 16px;
-    letter-spacing: 0.1rem;
-    overflow: hidden;
 }
 
 .add-book-btn {
+    width: 22vh;
     height: 10vh;
     padding: 16px;
     margin: 0px 5px;
+    display: block;
     background-color: #00ff93;
     color: #002433;
     font-family: "KoHo";
@@ -131,9 +96,11 @@ input::placeholder {
 
 
 .del-book-btn {
+    width: 22vh;
     height: 10vh;
     padding: 16px;
     margin: 0px 5px;
+    display: block;
     background-color: crimson;
     color: #002433;
     font-family: "KoHo";
@@ -147,14 +114,45 @@ input::placeholder {
     color: orange;
 }
 
+.all-books .list-part {
+    width: 25vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: auto;
+}
+
+.all-books .list-part ul {
+    list-style: none;
+    padding-top: 1vh;
+}
+
+.book-select-btn {
+    background-color: orange;
+    width: 20vw;
+    min-width: 100%;
+    margin-bottom: 10px;
+    padding: 15px 0;
+    border-radius: 5px;
+    color: #fafafa;
+    font-family: "KoHo";
+    font-size: 16px;
+    letter-spacing: 0.1rem;
+    overflow: hidden;
+}
+
 .book-info {
+    /*background-image: url("./public/Vorderrhein.png");*/
+    background-size: cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 75vw;
     height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: rgb(25,25,25);
+    overflow: hidden;
 }
 
 .book-info .more-details {
@@ -171,11 +169,14 @@ input::placeholder {
 .book-info .more-details .top-part {
     width: 60vw;
     height: 55vh;
+    position: absolute;
+    top: 3%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: #202529;
+    border-radius: 5px;
     
 }
 
@@ -186,7 +187,6 @@ input::placeholder {
     padding: 15px;
     background-color: #202529;
     border-radius: 5px;
-    border: 3px solid orange;
 
 }
 
@@ -217,7 +217,11 @@ input::placeholder {
 
 .book-info .more-details .top-part .btn-part .add-comment-btn {
     width: 20vw;
+    height: 7vh;
     padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #00ff93;
     border: none;
     border-radius: 5px;
@@ -228,7 +232,11 @@ input::placeholder {
 
 .book-info .more-details .top-part .btn-part .del-book-btn {
     width: 20vw;
+    height: 7vh;
     padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: crimson;
     border: none;
     border-radius: 5px;
@@ -239,6 +247,7 @@ input::placeholder {
 
 .book-info .more-details .top-part .info-part .comment-part {
     display: flex;
+    position: absolute;
     justify-content: space-between;
     align-items: center;
     border: 3px solid royalblue;
@@ -264,7 +273,6 @@ input::placeholder {
     padding: 10px;
     justify-content: center;
     background-color: #202529;
-    border: 3px solid royalblue;
     border-radius: 5px;
     overflow: auto;
 }
@@ -287,11 +295,11 @@ input::placeholder {
 }
 
 .comment-more-details {
-    position: absolute;
-    top: -10px;
-    width: 65vw;
-    height: 60vh;
+    width: 60vw;
+    height: 55vh;
     padding-left: 25px;
+    position: absolute;
+    top: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -489,7 +497,7 @@ input::placeholder {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: rgb(25,25,25); 
+    background: #fafafa; 
 }
  
 /* Handle */

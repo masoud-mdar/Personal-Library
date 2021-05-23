@@ -149,7 +149,7 @@ const App = () => {
                 surelyDeleteFunc(setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment, selectedBook, swal)
                 break
             case "book-select" :
-                bookSelectFunc(id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails)
+                bookSelectFunc(id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails, setIsShowComments)
                 break
             case "add-comment" :
                 addCommentFunc(setIsAddComment, setIsAddNewBook, setCommentMoreDetails, setIsSurelyDelete, setIsSurelyDelBook)
@@ -203,25 +203,15 @@ const App = () => {
                                     }}
                                 />
 
-                                <div className="list-part">
-                                    {
-                                        !allBooksList.length ? (
 
-                                            <EmptyBookList />
+                                <AllBooksList 
+                                    data = {{
+                                        handleClick: handleClick,
+                                        allBooksList: allBooksList
+                                    }}
+                                />
 
-                                        ) : (
-
-                                            <AllBooksList 
-                                                data = {{
-                                                    handleClick: handleClick,
-                                                    allBooksList: allBooksList
-                                                }}
-                                            />
-
-                                        )
-                                    }
-
-                                </div>
+                               
                             </div>
 
                             <div className="book-info">
@@ -301,7 +291,8 @@ const App = () => {
                                                             data = {{
                                                                 handleClick: handleClick,
                                                                 user: user,
-                                                                selectedComment: selectedComment
+                                                                selectedComment: selectedComment,
+                                                                selectedBook: selectedBook
                                                             }}
                                                         />
                                                     )
@@ -321,7 +312,8 @@ const App = () => {
                                                 data = {{
                                                     handleClick: handleClick,
                                                     selectedBook: selectedBook,
-                                                    isShowComments: isShowComments
+                                                    isShowComments: isShowComments,
+                                                    selectedBookComments: selectedBookComments
                                                 }}
                                             />
                                         </div>
