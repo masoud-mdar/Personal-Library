@@ -186,147 +186,155 @@ const App = () => {
 
     return (
         <div>
-            <Navbar />
+            
             {
                 !isLoading ? (
                     <div className="container">
+                        <Navbar />
 
-                        <div className="all-books">
+                        <div className="main-part">
 
-                            <AllBookButton 
-                                data = {{
-                                    handleClick: handleClick
-                                }}
-                            />
 
-                            <div className="list-part">
-                                {
-                                    !allBooksList.length ? (
+                            <div className="all-books">
 
-                                        <EmptyBookList />
+                                <AllBookButton 
+                                    data = {{
+                                        handleClick: handleClick
+                                    }}
+                                />
 
-                                    ) : (
+                                <div className="list-part">
+                                    {
+                                        !allBooksList.length ? (
 
-                                        <AllBooksList 
-                                            data = {{
-                                                handleClick: handleClick,
-                                                allBooksList: allBooksList
-                                            }}
-                                        />
+                                            <EmptyBookList />
 
-                                    )
-                                }
+                                        ) : (
 
+                                            <AllBooksList 
+                                                data = {{
+                                                    handleClick: handleClick,
+                                                    allBooksList: allBooksList
+                                                }}
+                                            />
+
+                                        )
+                                    }
+
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="book-info">
-                            {
-                                isSurelyDelete && (
-
-                                    <Delete
-                                        data = {{
-                                            handleClick: handleClick,
-                                            isSurelyDelBook: isSurelyDelBook,
-                                            isSurelyDelComment: isSurelyDelComment,
-                                            selectedBook: selectedBook
-                                        }}
-                                    />
-                                )
-                            }
-
+                            <div className="book-info">
                                 {
-                                    isAddNewBook && (
+                                    isSurelyDelete && (
 
-                                        <AddNewBook
+                                        <Delete
                                             data = {{
                                                 handleClick: handleClick,
-                                                handleChange: handleChange,
-                                                newBTitleInput: newBTitleInput,
-                                                newBAuthorInput: newBAuthorInput
+                                                isSurelyDelBook: isSurelyDelBook,
+                                                isSurelyDelComment: isSurelyDelComment,
+                                                selectedBook: selectedBook
                                             }}
                                         />
                                     )
                                 }
-                            {
-                                moreDetails && (
-                                    <div className="more-details">
 
-                                        <div className="top-part">
+                                    {
+                                        isAddNewBook && (
 
-                                            <BookInfoPart
+                                            <AddNewBook
+                                                data = {{
+                                                    handleClick: handleClick,
+                                                    handleChange: handleChange,
+                                                    newBTitleInput: newBTitleInput,
+                                                    newBAuthorInput: newBAuthorInput
+                                                }}
+                                            />
+                                        )
+                                    }
+                                {
+                                    moreDetails && (
+                                        <div className="more-details">
+
+                                            <div className="top-part">
+
+                                                <BookInfoPart
+                                                    data = {{
+                                                        handleClick: handleClick,
+                                                        selectedBook: selectedBook,
+                                                        isShowComments: isShowComments
+                                                    }}
+                                                />
+
+                                                {
+                                                    isAddComment && (
+
+                                                        <AddComment
+                                                            data = {{
+                                                                handleClick: handleClick,
+                                                                handleChange: handleChange,
+                                                                newCommentInput: newCommentInput,
+                                                                selectedBook: selectedBook
+                                                            }}
+                                                        />
+                                                    )
+                                                }
+
+                                                {
+                                                    isEditComment && (
+
+                                                        <EditComment
+                                                            data = {{
+                                                                handleClick: handleClick,
+                                                                handleChange: handleChange,
+                                                                editCommentInput: editCommentInput,
+                                                                selectedBook: selectedBook
+                                                            }}
+                                                        />
+                                                    )
+                                                }
+
+                                                {
+                                                    commentMoreDetails && (
+
+                                                        <CommentMoreDetails
+                                                            data = {{
+                                                                handleClick: handleClick,
+                                                                user: user,
+                                                                selectedComment: selectedComment
+                                                            }}
+                                                        />
+                                                    )
+                                                }
+
+                                                <CommentButtons
+                                                    data = {{
+                                                        handleClick: handleClick,
+                                                        selectedBook: selectedBook,
+                                                        user: user
+                                                    }}
+                                                />
+
+                                            </div>
+
+                                            <CommentBottomPart
                                                 data = {{
                                                     handleClick: handleClick,
                                                     selectedBook: selectedBook,
                                                     isShowComments: isShowComments
                                                 }}
                                             />
-
-                                            {
-                                                isAddComment && (
-
-                                                    <AddComment
-                                                        data = {{
-                                                            handleClick: handleClick,
-                                                            handleChange: handleChange,
-                                                            newCommentInput: newCommentInput,
-                                                            selectedBook: selectedBook
-                                                        }}
-                                                    />
-                                                )
-                                            }
-
-                                            {
-                                                isEditComment && (
-
-                                                    <EditComment
-                                                        data = {{
-                                                            handleClick: handleClick,
-                                                            handleChange: handleChange,
-                                                            editCommentInput: editCommentInput,
-                                                            selectedBook: selectedBook
-                                                        }}
-                                                    />
-                                                )
-                                            }
-
-                                            {
-                                                commentMoreDetails && (
-
-                                                    <CommentMoreDetails
-                                                        data = {{
-                                                            handleClick: handleClick,
-                                                            user: user,
-                                                            selectedComment: selectedComment
-                                                        }}
-                                                    />
-                                                )
-                                            }
-
-                                            <CommentButtons
-                                                data = {{
-                                                    handleClick: handleClick,
-                                                    selectedBook: selectedBook,
-                                                    user: user
-                                                }}
-                                            />
-
                                         </div>
+                                    )
+                                }
 
-                                        <CommentBottomPart
-                                            data = {{
-                                                handleClick: handleClick,
-                                                selectedBook: selectedBook,
-                                                isShowComments: isShowComments
-                                            }}
-                                        />
-                                    </div>
-                                )
-                            }
+                            </div>
 
                         </div>
 
                     </div>
+
+
                 ) : (
                     <Loading />
                 )

@@ -1,12 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
+    font-family: "Kanit";
+}
+
+button {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
 }
 
 input {
-    margin-right: 10px;
-    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
 }
 
 input:focus {
@@ -16,93 +31,114 @@ input:focus {
 input::placeholder {
     color: #fafafa;
     font-size: large;
-}
-
-.nav-bar {
-    width: 100vw;
-    height: 10vh;
-    background-color: #002433;
+    font-family: "KoHo";
 }
 
 .container {
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    background-color: #fafafa;
+    flex-direction: column;
+    z-index: 1;
+}
+
+
+.nav-bar {
+    background-color: #002433;
+    width: 100vw;
+    height: 10vh;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #faffff;
+    font-family: "Itim";
+}
+
+.main-part {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
 }
 
 .all-books {
+    /*background-image: url("./public/Vorderrhein.png");*/
     width: 25vw;
     height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(25,25,25);
+    justify-content: space-evenly;
+    border-right: 3px solid #002433;
     overflow: auto;
 }
 
 .all-books .btn-part {
     width: 25vw;
-    height: 15vh;
-    padding: 10px;
-    position: relative;
+    height: 20vh;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+}
+.all-books .list-part {
+    width: 25vw;
+    height: 70vh;
 }
 
-.all-books .list-part {
+.all-books .list-part .all-books-list{
     width: 25vw;
     height: 70vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    overflow: auto;
+    border: 5px solid green;
 }
+
+
 
 .all-books-list ul {
     list-style: none;
+
 }
 
 .book-select-btn {
-    padding: 15px 5px;
-    margin: 10px 0;
+    background-color: orange;
     width: 20vw;
-    background: orange;
-    outline: none;
-    border: none;
-    border-radius: 5px;
+    min-width: 100%;
+    margin-bottom: 1px;
+    padding: 15px 0;
+    border-radius: 3px;
     color: #fafafa;
+    font-family: "KoHo";
     font-size: 16px;
+    letter-spacing: 0.1rem;
+    overflow: hidden;
 }
 
 .add-book-btn {
-    width: 50px;
-    height: 50px;
-    margin: 10px;
+    height: 10vh;
+    padding: 16px;
+    margin: 0px 5px;
     background-color: #00ff93;
-    border: none;
-    border-radius: 50%;
     color: #002433;
-    font-size: 32px;
-    text-align: center;
-    text-justify: auto;
+    font-family: "KoHo";
+    white-space:normal;
+    overflow: hidden;
     transition: 500ms;
 }
 
 
 .del-book-btn {
-    width: 50px;
-    height: 50px;
-    margin: 10px;
+    height: 10vh;
+    padding: 16px;
+    margin: 0px 5px;
     background-color: crimson;
-    border: none;
-    border-radius: 50%;
     color: #002433;
-    font-size: 32px;
-    text-align: center;
-    text-justify: auto;
+    font-family: "KoHo";
+    white-space:normal;
+    overflow: hidden;
     transition: 500ms;
 }
 
