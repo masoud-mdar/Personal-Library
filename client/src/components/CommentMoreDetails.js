@@ -4,7 +4,7 @@ const CommentMoreDetails = (props) => {
 
     return (
         <div className="comment-more-details">
-            {/*<button name="close" onClick={handleClick} className="btn close">X</button>*/}
+            <button name="close" onClick={props.data.handleClick} className="btn close">X</button>
 
             <div className="text"><p>{props.data.selectedComment.commentText}</p></div>
             <div className="author"><p>By "{props.data.selectedComment.commentAuthor}"</p></div>

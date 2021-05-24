@@ -178,6 +178,14 @@ const App = () => {
             case "show-comments" :
                 showCommentsFunc(setIsShowComments, setCommentMoreDetails, setIsAddComment, setIsEditComment, setIsAddNewBook)
                 break
+            case "close":
+                moreDetails && !isAddNewBook && !isEditComment && !commentMoreDetails && !isAddComment && setMoreDetails(false)
+                isAddNewBook && setIsAddNewBook(false)
+                isEditComment && setIsEditComment(false)
+                isAddComment && setIsAddComment(false)
+                commentMoreDetails && !isAddNewBook && !isEditComment && !isAddComment && setCommentMoreDetails(false)
+                break
+
             default :
                 console.log(name)
                 break
