@@ -55,6 +55,14 @@ input::placeholder {
     font-family: "Itim";
 }
 
+.nav-bar .right-part .nav-btn {
+    background-color: #002433;
+    padding: 16px;
+    color: #fafafa;
+    font-size: 16px;
+
+}
+
 .main-part {
     width: 100vw;
     height: 90vh;
@@ -62,7 +70,6 @@ input::placeholder {
 }
 
 .all-books {
-    /*background-image: url("./public/Vorderrhein.png");*/
     width: 25vw;
     height: 90vh;
     display: flex;
@@ -80,6 +87,30 @@ input::placeholder {
     align-items: center;
 }
 
+.all-books .btn-part .add-part div {
+    display: none;
+    position: absolute;
+    top: 10%;
+    width: 22vh;
+    text-align: center;
+}
+
+.all-books .btn-part .del-part div {
+    display: none;
+    position: absolute;
+    top: 0;
+    top: 10%;
+    width: 22vh;
+    text-align: center;
+}
+
+.add-del-hover-p {
+    font-family: "KoHo";
+    padding: 10px;
+    font-weight: bold;
+    color: #002433;
+}
+
 .add-book-btn {
     width: 22vh;
     height: 10vh;
@@ -92,6 +123,14 @@ input::placeholder {
     white-space:normal;
     overflow: hidden;
     transition: 500ms;
+}
+
+.all-books .btn-part .add-part:hover div {
+    display: block;
+}
+
+.all-books .btn-part .del-part:hover div {
+    display: block;
 }
 
 
@@ -117,6 +156,7 @@ input::placeholder {
 .all-books .list-part {
     width: 25vw;
     height: 70vh;
+    margin-right: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -144,7 +184,6 @@ input::placeholder {
 }
 
 .book-info {
-    /*background-image: url("./public/Vorderrhein.png");*/
     background-size: cover;
     position: relative;
     display: flex;
@@ -272,7 +311,8 @@ input::placeholder {
     height: 20vh;
     padding: 10px;
     justify-content: center;
-    background-color: #202529;
+    background-color: #002433;
+    border: 3px solid #002433;
     border-radius: 5px;
     overflow: auto;
 }
@@ -475,6 +515,15 @@ input::placeholder {
     height: 50vh;
 }
 
+.empty-books-list {
+    width: 75vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #002433;
+}
+
 .close {
     position: absolute;
     top: 0;
@@ -497,17 +546,18 @@ input::placeholder {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #fafafa; 
+    background: #fafafa;
+    border-right: 3px solid #002433;
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: royalblue;
-    border-radius: 5px;
+    background: #002433bb;
+    border-radius: 0px;
                 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(32, 178, 171, 0.856);
+    background: #00272f;
 }

@@ -190,7 +190,12 @@ const App = () => {
             {
                 !isLoading ? (
                     <div className="container">
-                        <Navbar />
+                        <Navbar
+                            data={{
+                                handleClick: handleClick,
+                                user: user
+                            }}
+                        />
 
                         <div className="main-part">
 
@@ -243,7 +248,7 @@ const App = () => {
                                         )
                                     }
                                 {
-                                    moreDetails && (
+                                    moreDetails ? (
                                         <div className="more-details">
 
                                             <div className="top-part">
@@ -316,6 +321,10 @@ const App = () => {
                                                     selectedBookComments: selectedBookComments
                                                 }}
                                             />
+                                        </div>
+                                    ) : (
+                                        <div className="more-details">
+                                            <EmptyBookList />
                                         </div>
                                     )
                                 }

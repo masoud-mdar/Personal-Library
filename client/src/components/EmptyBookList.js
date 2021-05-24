@@ -5,7 +5,7 @@ const EmptyBookList = (props) => {
     return (
         <div className="empty-books-list">
             <h2>
-                No book in here...
+                Select a book or add a new one ...
             </h2>
         </div>
     )
