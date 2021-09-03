@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+@media only screen and (max-width: 649px) {
+
+    .add-new-comment, .edit-comment, .add-new-book {
+        position: absolute;
+        top: 5%;
+        width: 45vw;
+        height: 30vh;
+        padding: 0 10px;
+        background-color: rgb(25,25,25);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border-radius: 5px;
+        z-index: 1;
+    }
+
+    .add-new-comment input, .edit-comment input, .add-new-book input {
+        height: 7vh;
+        margin-top: 5px;
+        padding: 5px;
+        background-color: #2b3034;
+        border: none;
+        border-radius: 5px;
+        color: #fafafa;
+        font-size: 8px;
+    }
+    .add-new-comment .submit-new-comment, .edit-comment .submit-new-comment, .add-new-book .new-book-submit {
+        height: 5vh;
+        border: none;
+        border-radius: 5px;
+        background-color: #00ff93;
+        color: #fafafa;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .comment-more-details {
+        width: 50vw;
+        height: 55vh;
+        padding: 20px;
+        position: absolute;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #202529;
+        border: 3px solid crimson;
+        border-radius: 5px;
+        color: #fafafa;
+        overflow: auto;
+    }
+    .comment-more-details .text {
+        width: 30vw;
+        height: 10vh;
+        padding: 10px;
+        background-color: #2b3034;
+        border: 3px solid royalblue;
+        border-radius: 5px;
+        white-space: normal;
+        font-size: 10px;
+    }
+    .comment-more-details .comment-btn-part {
+        width: 35vw;
+        height: 30vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .agree-btn, .disagree-btn {
+        width: 15vw;
+        height: 5vh;
+        border: 3px solid #00ff93;
+        border-radius: 5px;
+        color: #fafafa;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    .comment-more-details .comment-btn-part .buttons {
+        width: 25vw;
+        height: 20vh;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .comment-more-details .comment-btn-part .buttons button {
+        width: 20vw;
+        height: 5vh;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: orange;
+        color: #fafafa;
+        font-size: 10px;
+        font-weight: bold;
+    }
+}
+
+@media only screen and (min-width: 649px) {
+
+    .add-new-comment, .edit-comment, .add-new-book {
+        position: absolute;
+        top: 5%;
+        width: 45vw;
+        height: 45vh;
+        padding: 0 10px;
+        background-color: rgb(25,25,25);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border-radius: 5px;
+        z-index: 1;
+    }
+
+    .add-new-comment input, .edit-comment input, .add-new-book input {
+        height: 10vh;
+        margin-top: 25px;
+        padding: 5px;
+        background-color: #2b3034;
+        border: none;
+        border-radius: 5px;
+        color: #fafafa;
+    }
+    .add-new-comment .submit-new-comment, .edit-comment .submit-new-comment, .add-new-book .new-book-submit {
+        height: 10vh;
+        border: none;
+        border-radius: 5px;
+        background-color: #00ff93;
+        color: #fafafa;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .comment-more-details {
+        width: 60vw;
+        height: 55vh;
+        padding-left: 25px;
+        position: absolute;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: #202529;
+        border: 3px solid crimson;
+        border-radius: 5px;
+        color: #fafafa;
+        overflow: auto;
+    }
+    .comment-more-details .text {
+        width: 55vw;
+        height: 20vh;
+        padding: 10px;
+        background-color: #2b3034;
+        border: 3px solid royalblue;
+        border-radius: 5px;
+        white-space: normal;
+    }
+    .comment-more-details .comment-btn-part {
+        width: 55vw;
+        height: 20vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .agree-btn, .disagree-btn {
+        width: 10vw;
+        height: 5vh;
+        border: 3px solid #00ff93;
+        border-radius: 5px;
+        color: #fafafa;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .comment-more-details .comment-btn-part .buttons {
+        width: 25vw;
+        height: 20vh;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .comment-more-details .comment-btn-part .buttons button {
+        width: 20vw;
+        height: 10vh;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: orange;
+        color: #fafafa;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
+
+
+
+
+
+
+.comment-more-details .comment-btn-part .comment-info {
+    width: 35vw;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+}
+
+.comment-more-details .comment-btn-part .comment-info button {
+    display: inline-block;
+}
+
+.like-unlike-wrapper {
+    width: 15vw;
+    height: 10vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.like p, .unlike p {
+    display: none;
+    position: absolute;
+    top: -10vh;
+    height: 10vh;
+    width: 10vw;
+    padding: 5px;
+    background-color: rgb(25,25,25);
+    border-radius: 5px;
+    text-align: center;
+    z-index: 1;
+    overflow: auto;
+}
+
+.like:hover p {
+    display: inline-block;
+}
+
+.unlike:hover p {
+    display: inline-block;
+}
+
+
+.surely-delete {
+    width: 65vw;
+    height: 35vh;
+    position: absolute;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 3px solid crimson;
+    border-radius: 5px;
+    background-color: rgb(25,25,25);
+    color: #fafafa;
+    z-index: 1;
+}
+
+.surely-delete button {
+    width: 35vw;
+    height: 10vh;
+    border: none;
+    border-radius: 5px;
+    color: #fafafa;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.surely-delete .yes {
+    background-color: crimson;
+}
+.surely-delete .no {
+    background-color: #00ff93;
+}

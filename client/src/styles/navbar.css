@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+@media only screen and (max-width: 649px) {
+
+    .nav-bar {
+        background-color: #002433;
+        width: 100vw;
+        height: 10vh;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #faffff;
+        font-family: "Itim";
+    }
+    
+    .nav-bar .right-part .nav-btn {
+        background-color: #002433;
+        padding: 10px;
+        color: #fafafa;
+        font-size: 12px;
+    }
+    
+}
+
+@media only screen and (min-width: 649px) {
+
+    .nav-bar {
+        background-color: #002433;
+        width: 100vw;
+        height: 10vh;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #faffff;
+        font-family: "Itim";
+    }
+    
+    .nav-bar .right-part .nav-btn {
+        background-color: #002433;
+        padding: 16px;
+        color: #fafafa;
+        font-size: 16px;
+    }
+
+}
+

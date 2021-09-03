@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+@media only screen and (max-width: 649px) {
+    .book-info {
+        background-size: cover;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50vw;
+        height: 90vh;
+        overflow: hidden;
+    }
+
+    .book-info .more-details {
+        width: 50vw;
+        height: 85vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .book-info .more-details .top-part .info-part {
+        position: relative;
+        width: 60vw;
+        height: 35vh;
+        padding: 15px;
+        margin-left: 10px;
+        background-color: #202529;
+        border-radius: 5px;
+    
+    }
+    
+    .book-info .more-details .top-part .info-part .div{
+        width: 50vw;
+        height: 5vh;
+        padding-left: 10px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        background-color: #2b3034;
+        border-radius: 5px;
+        color: #fafafa;
+        font-size: 10px;
+    }
+
+    .book-info .more-details .top-part .info-part .comment-part {
+        display: flex;
+        position: absolute;
+        justify-content: space-between;
+        align-items: center;
+        border: 3px solid royalblue;
+    }
+    
+    .book-info .more-details .top-part .info-part .comment-part .show-comments-btn {
+        width: 10vw;
+        height: 5vh;
+        background-color: royalblue;
+        border: none;
+        border-radius: 5px;
+        color: #202529;
+        font-size: 8px;
+        font-weight: bold;
+    }
+
+    .book-info .more-details .top-part .btn-part {
+        width: 60vw;
+        height: 10vh;
+        padding: 10px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #202529;
+        border-radius: 5px;
+    }
+    
+    .book-info .more-details .top-part .btn-part .add-comment-btn {
+        width: 20vw;
+        height: 5vh;
+        padding: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #00ff93;
+        border: none;
+        border-radius: 5px;
+        color: #202529;
+        font-size: 8px;
+        font-weight: bold;
+    }
+    
+    .book-info .more-details .top-part .btn-part .del-book-btn {
+        width: 20vw;
+        height: 5vh;
+        padding: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: crimson;
+        border: none;
+        border-radius: 5px;
+        color: #202529;
+        font-size: 8px;
+        font-weight: bold;
+    }
+
+    .book-info .more-details .bottom-part {
+        display: none;
+        position: absolute;
+        top: 60vh;
+        width: 50vw;
+        height: 20vh;
+        padding: 10px;
+        justify-content: center;
+        background-color: #002433;
+        border: 3px solid #002433;
+        border-radius: 5px;
+        overflow: auto;
+    }
+
+    .book-info .more-details .bottom-part .comment-list ul button {
+        width: 30vw;
+        height: 5vh;
+        margin: 10px;
+        background-color: #2b3034;
+        border: none;
+        border-radius: 5px;
+        color: #fafafa;
+        font-size: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 649px) {
+    .book-info {
+        background-size: cover;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 75vw;
+        height: 90vh;
+        overflow: hidden;
+    }
+
+    .book-info .more-details {
+        width: 70vw;
+        height: 85vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .book-info .more-details .top-part .info-part {
+        position: relative;
+        width: 60vw;
+        height: 45vh;
+        padding: 15px;
+        background-color: #202529;
+        border-radius: 5px;
+    
+    }
+    
+    .book-info .more-details .top-part .info-part .div{
+        width: 55vw;
+        height: 6vh;
+        padding-left: 10px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        background-color: #2b3034;
+        border-radius: 5px;
+        color: #fafafa;
+        font-size: 16px;
+    }
+
+    .book-info .more-details .top-part .info-part .comment-part {
+        display: flex;
+        position: absolute;
+        justify-content: space-between;
+        align-items: center;
+        border: 3px solid royalblue;
+    }
+    
+    .book-info .more-details .top-part .info-part .comment-part .show-comments-btn {
+        width: 15vw;
+        height: 6vh;
+        background-color: royalblue;
+        border: none;
+        border-radius: 5px;
+        color: #202529;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .book-info .more-details .top-part .btn-part {
+        width: 60vw;
+        height: 10vh;
+        padding: 15px;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #202529;
+        border-radius: 5px;
+    }
+    
+    .book-info .more-details .top-part .btn-part .add-comment-btn {
+        width: 20vw;
+        height: 7vh;
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #00ff93;
+        border: none;
+        border-radius: 5px;
+        color: #202529;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .book-info .more-details .top-part .btn-part .del-book-btn {
+        width: 20vw;
+        height: 7vh;
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: crimson;
+        border: none;
+        border-radius: 5px;
+        color: #202529;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .book-info .more-details .bottom-part {
+        display: none;
+        position: absolute;
+        top: 60vh;
+        width: 70vw;
+        height: 20vh;
+        padding: 10px;
+        justify-content: center;
+        background-color: #002433;
+        border: 3px solid #002433;
+        border-radius: 5px;
+        overflow: auto;
+    }
+
+    .book-info .more-details .bottom-part .comment-list ul button {
+        width: 30vw;
+        height: 10vh;
+        margin: 15px;
+        background-color: #2b3034;
+        border: none;
+        border-radius: 5px;
+        color: #fafafa;
+        font-size: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+}
+
+
+
+
+
+.book-info .more-details .top-part {
+    width: 60vw;
+    height: 55vh;
+    position: absolute;
+    top: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #202529;
+    border-radius: 5px;
+    
+}
+
+
+
+.book-info .more-details .bottom-part .comment-list ul {
+    list-style: none;
+}
+
