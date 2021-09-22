@@ -1,7 +1,7 @@
-const deleteAllFunc = (setIsSurelyDelete, setIsEditComment, setIsAddNewBook) => {
-    setIsSurelyDelete(true)
-    setIsEditComment(false)
-    setIsAddNewBook(false)
+const deleteAllFunc = (params) => {
+    params.setIsSurelyDelete(true)
+    params.setIsEditComment(false)
+    params.setIsAddNewBook(false)
 }
 
 export default deleteAllFunc

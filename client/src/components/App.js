@@ -33,6 +33,8 @@ import deleteCommentFunc from "../logic/deleteCommentFunc"
 import editCommentFunc from "../logic/editCommentFunc"
 import showCommentsFunc from "../logic/showCommentsFunc"
 
+import parameters from "../parameters/parameters"
+
 import {BASE_URL} from "../utils/constants"
 import {user} from "../utils/constants"
 
@@ -131,52 +133,68 @@ const App = () => {
 
         switch (name) {
             case "all-books" :
-                allBooksFunc(setIsLoading, axios, BASE_URL, setAllBooksList)
+                let allBooksFuncParams = parameters(variablesToExport, "allBooksFuncParams")
+                allBooksFunc(allBooksFuncParams)
                 break
             case "add-new-book" :
-                newBookFunc(setIsAddNewBook, setIsAddComment, setIsEditComment)
+                let newBookFuncParams = parameters(variablesToExport, "newBookFuncParams")
+                newBookFunc(newBookFuncParams)
                 break
             case "new-book-submit" :
-                submitNewBookFunc(setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput, swal)
+                let submitNewBookFuncParams = parameters(variablesToExport, "submitNewBookFuncParams")
+                submitNewBookFunc(submitNewBookFuncParams)
                 break
             case "delete-all" :
-                deleteAllFunc(setIsSurelyDelete, setIsEditComment, setIsAddNewBook)
+                let deleteAllFuncParams = parameters(variablesToExport, "deleteAllFuncParams")
+                deleteAllFunc(deleteAllFuncParams)
                 break
             case "no-sure-del" :
-                noSureDelFunc(setIsSurelyDelete, setIsSurelyDelBook, setIsSurelyDelComment)
+                let noSureDelFuncParams = parameters(variablesToExport, "noSureDelFuncParams")
+                noSureDelFunc(noSureDelFuncParams)
                 break
             case "surely-delete" :
-                surelyDeleteFunc(setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment, selectedBook, swal)
+                let surelyDeleteFuncParams = parameters(variablesToExport, "surelyDeleteFuncParams")
+                surelyDeleteFunc(surelyDeleteFuncParams)
                 break
             case "book-select" :
-                bookSelectFunc(id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails, setIsShowComments)
+                let bookSelectFuncParams = parameters(variablesToExport, "bookSelectFuncParams")
+                bookSelectFunc(bookSelectFuncParams, id)
                 break
             case "add-comment" :
-                addCommentFunc(setIsAddComment, setIsAddNewBook, setCommentMoreDetails, setIsSurelyDelete, setIsSurelyDelBook)
+                let addCommentFuncParams = parameters(variablesToExport, "addCommentFuncParams")
+                addCommentFunc(addCommentFuncParams)
                 break
             case "submit-new-comment" :
-                submitNewCommentFunc(setIsLoading, setIsEditComment, newCommentInput, user, axios, BASE_URL, selectedBookId, setIsAddComment, setCount, setNewCommentInput, setMoreDetails, setCommentMoreDetails, setSelectedBook, setSelectedBookComments, isEditComment, setSelectedComment, setSelectedCommentId, setIsShowComments, editCommentInput, selectedComment, selectedBookComments, selectedCommentId, setEditCommentInput, setSelectedBookId)
+                let submitNewCommentFuncParams = parameters(variablesToExport, "submitNewCommentFuncParams")
+                submitNewCommentFunc(submitNewCommentFuncParams)
                 break
             case "del-book" :
-                deleteBookFunc(setIsSurelyDelete, setIsSurelyDelBook, setIsAddComment, setIsEditComment, setIsAddNewBook)
+                let deleteBookFuncParams = parameters(variablesToExport, "deleteBookFuncParams")
+                deleteBookFunc(deleteBookFuncParams)
                 break
             case "comment-more-details" :
-                commentMoreDetailsFunc(id, setIsAddComment, setIsEditComment, setIsAddNewBook, setCommentMoreDetails, setSelectedCommentId, selectedBookComments, setSelectedComment, setIsSurelyDelete, setIsSurelyDelBook)
+                let commentMoreDetailsFuncParams = parameters(variablesToExport, "commentMoreDetailsFuncParams")
+                commentMoreDetailsFunc(commentMoreDetailsFuncParams, id)
                 break
             case "agree" :
-                agreeFunc(setIsAddComment, setIsEditComment, setIsAddNewBook, selectedComment, user, selectedBookComments, selectedCommentId, setSelectedBook, setSelectedBookComments, setCommentMoreDetails, setSelectedComment, axios, BASE_URL, selectedBookId, setSelectedBookId)
+                let agreeFuncParams = parameters(variablesToExport, "agreeFuncParams")
+                agreeFunc(agreeFuncParams)
                 break
             case "disagree" :
-                disagreeFunc(setIsAddComment, setIsEditComment, setIsAddNewBook, selectedComment, user, selectedBookComments, selectedCommentId, setSelectedBook, setSelectedBookComments, setCommentMoreDetails, setSelectedComment, axios, BASE_URL, selectedBookId, setSelectedBookId)
+                let disagreeFuncParams = parameters(variablesToExport, "disagreeFuncParams")
+                disagreeFunc(disagreeFuncParams)
                 break
             case "delete-comment" :
-                deleteCommentFunc(id, setSelectedCommentId, setIsSurelyDelComment, setIsAddComment, setIsEditComment, setIsAddNewBook, setIsSurelyDelBook, setIsSurelyDelete)
+                let deleteCommentFuncParams = parameters(variablesToExport, "deleteCommentFuncParams")
+                deleteCommentFunc(deleteCommentFuncParams, id)
                 break
             case "edit-comment" :
-                editCommentFunc(setIsEditComment, setIsAddComment, setIsAddNewBook, setEditCommentInput, selectedComment)
+                let editCommentFuncParams = parameters(variablesToExport, "editCommentFuncParams")
+                editCommentFunc(editCommentFuncParams)
                 break
             case "show-comments" :
-                showCommentsFunc(setIsShowComments, setCommentMoreDetails, setIsAddComment, setIsEditComment, setIsAddNewBook)
+                let showCommentsFuncParams = parameters(variablesToExport, "showCommentsFuncParams")
+                showCommentsFunc(showCommentsFuncParams)
                 break
             case "close":
                 moreDetails && !isAddNewBook && !isEditComment && !commentMoreDetails && !isAddComment && setMoreDetails(false)
@@ -185,11 +203,50 @@ const App = () => {
                 isAddComment && setIsAddComment(false)
                 commentMoreDetails && !isAddNewBook && !isEditComment && !isAddComment && setCommentMoreDetails(false)
                 break
-
             default :
                 console.log(name)
                 break
         }
+    }
+
+    const variablesToExport = {
+        newCommentInput,
+        isEditComment,
+        editCommentInput,
+        selectedComment,
+        newBTitleInput,
+        newBAuthorInput,
+        isSurelyDelBook,
+        selectedBookId,
+        isSurelyDelComment,
+        selectedBookComments,
+        selectedCommentId,
+        selectedBook,
+        user,
+        BASE_URL,
+        axios,
+        swal,
+        setIsLoading,
+        setAllBooksList,
+        setIsAddNewBook,
+        setIsAddComment,
+        setIsEditComment,
+        setSelectedBook,
+        setSelectedBookComments,
+        setSelectedBookId,
+        setCommentMoreDetails,
+        setMoreDetails,
+        setIsSurelyDelete,
+        setIsSurelyDelBook,
+        setCount,
+        setNewBTitleInput,
+        setNewBAuthorInput,
+        setNewCommentInput,
+        setIsSurelyDelComment,
+        setSelectedCommentId,
+        setSelectedComment,
+        setIsShowComments,
+        setEditCommentInput
     }
 
     return (

@@ -1,30 +1,30 @@
-const bookSelectFunc = (id, setIsLoading, setIsSurelyDelete, setIsSurelyDelBook, setIsAddNewBook, axios, BASE_URL, setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setIsAddComment, setIsEditComment, setMoreDetails, setIsShowComments) => {
-    setIsLoading(true)
-    setIsSurelyDelete(false)
-    setIsSurelyDelBook(false)
-    setIsAddNewBook(false)
-    setIsShowComments(false)
+const bookSelectFunc = (params, id) => {
+    params.setIsLoading(true)
+    params.setIsSurelyDelete(false)
+    params.setIsSurelyDelBook(false)
+    params.setIsAddNewBook(false)
+    params.setIsShowComments(false)
     
 
-    axios.get(`${BASE_URL}/api/books/${id}`).then(response => {
+    params.axios.get(`${params.BASE_URL}/api/books/${id}`).then(response => {
         const {data} = response
-        console.log(data)
+        //console.log(data)
 
         if (data.hasOwnProperty("error")) {
-            console.log(data)
+            //console.log(data)
 
         } else {
 
-            setSelectedBook(data)
-            setSelectedBookComments(data.comments)
-            setSelectedBookId(data._id)
-            setCommentMoreDetails(false)
-            setIsAddComment(false)
-            setIsEditComment(false)
-            setMoreDetails(true)
+            params.setSelectedBook(data)
+            params.setSelectedBookComments(data.comments)
+            params.setSelectedBookId(data._id)
+            params.setCommentMoreDetails(false)
+            params.setIsAddComment(false)
+            params.setIsEditComment(false)
+            params.setMoreDetails(true)
         }
         
-        setIsLoading(false)
+        params.setIsLoading(false)
     })
 
 

@@ -1,13 +1,13 @@
-const commentMoreDetailsFunc = (id, setIsAddComment, setIsEditComment, setIsAddNewBook, setCommentMoreDetails, setSelectedCommentId, selectedBookComments, setSelectedComment, setIsSurelyDelete, setIsSurelyDelBook) => {
-    setIsAddComment(false)
-    setIsEditComment(false)
-    setIsAddNewBook(false)
+const commentMoreDetailsFunc = (params, id) => {
+    params.setIsAddComment(false)
+    params.setIsEditComment(false)
+    params.setIsAddNewBook(false)
 
-    setCommentMoreDetails(prevCommentMoreDetails => !prevCommentMoreDetails)
-    setSelectedCommentId(id)
+    params.setCommentMoreDetails(prevCommentMoreDetails => !prevCommentMoreDetails)
+    params.setSelectedCommentId(id)
 
-    console.log(selectedBookComments)
-    let tempArr = selectedBookComments.filter(comment => {
+    //console.log(selectedBookComments)
+    let tempArr = params.selectedBookComments.filter(comment => {
         if (comment.commentId === id) {
             return true
         } else {
@@ -18,11 +18,11 @@ const commentMoreDetailsFunc = (id, setIsAddComment, setIsEditComment, setIsAddN
     //console.log(tempArr)
     //console.log(id)
 
-    setSelectedComment(tempArr[0])
+    params.setSelectedComment(tempArr[0])
 
-    setIsAddComment(false)
-    setIsSurelyDelete(false)
-    setIsSurelyDelBook(false)
+    params.setIsAddComment(false)
+    params.setIsSurelyDelete(false)
+    params.setIsSurelyDelBook(false)
 }
 
 export default commentMoreDetailsFunc

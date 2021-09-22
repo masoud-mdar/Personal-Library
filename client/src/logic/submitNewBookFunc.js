@@ -1,42 +1,42 @@
-const submitNewBookFunc = (setSelectedBook, setSelectedBookComments, setSelectedBookId, setCommentMoreDetails, setMoreDetails, setIsSurelyDelete, setIsSurelyDelBook, setIsLoading, setCount, setIsAddComment, setIsEditComment, setIsAddNewBook, newBTitleInput, newBAuthorInput, user, axios, BASE_URL, setNewBTitleInput, setNewBAuthorInput, setNewCommentInput, swal) => {
-    setIsLoading(true)
+const submitNewBookFunc = (params) => {
+    params.setIsLoading(true)
 
-    setIsSurelyDelete(false)
-    setIsSurelyDelBook(false)
-    setIsAddComment(false)
-    setIsEditComment(false)
-    setCommentMoreDetails(false)
-    setIsAddNewBook(false)
+    params.setIsSurelyDelete(false)
+    params.setIsSurelyDelBook(false)
+    params.setIsAddComment(false)
+    params.setIsEditComment(false)
+    params.setCommentMoreDetails(false)
+    params.setIsAddNewBook(false)
 
     const sendingData = {
-        title: newBTitleInput,
-        author: newBAuthorInput,
-        added_by: user
+        title: params.newBTitleInput,
+        author: params.newBAuthorInput,
+        added_by: params.user
     }
 
-    axios.post(`${BASE_URL}/api/books`, sendingData).then(response => {
+    params.axios.post(`${params.BASE_URL}/api/books`, sendingData).then(response => {
         const {data} = response
 
         if (data.hasOwnProperty("error")) {
-            swal.fire({
+            params.swal.fire({
                 icon: "error",
                 title: "Error!",
                 text: `${data.error}`
             })
         } else {
 
-            setNewBTitleInput("")
-            setNewBTitleInput("")
-            setNewBAuthorInput("")
-            setNewCommentInput("")
+            params.setNewBTitleInput("")
+            params.setNewBTitleInput("")
+            params.setNewBAuthorInput("")
+            params.setNewCommentInput("")
 
             //book select:
 
-            axios.get(`${BASE_URL}/api/books/${data._id}`).then(response => {
+            params.axios.get(`${params.BASE_URL}/api/books/${data._id}`).then(response => {
                 const {data} = response
 
                 if (data.hasOwnProperty("error")) {
-                    swal.fire({
+                    params.swal.fire({
                         icon: "error",
                         title: "Error!",
                         text: `${data.error}`
@@ -44,29 +44,29 @@ const submitNewBookFunc = (setSelectedBook, setSelectedBookComments, setSelected
 
                 } else {
 
-                    swal.fire(`${data.added_by}`, `The "${data.title}" written by "${data.author}" added successfully`, "success").then(
+                    params.swal.fire(`${data.added_by}`, `The "${data.title}" written by "${data.author}" added successfully`, "success").then(
                         (result) => {
 
                           if (result.isConfirmed || result.isDismissed) {
 
-                            setSelectedBook(data)
-                            setSelectedBookComments(data.comments)
-                            setSelectedBookId(data._id)
-                            setCommentMoreDetails(false)
-                            setMoreDetails(true)
+                            params.setSelectedBook(data)
+                            params.setSelectedBookComments(data.comments)
+                            params.setSelectedBookId(data._id)
+                            params.setCommentMoreDetails(false)
+                            params.setMoreDetails(true)
                           }
                         }
                     )
                 }
 
-                setIsSurelyDelete(false)
-                setIsSurelyDelBook(false)
+                params.setIsSurelyDelete(false)
+                params.setIsSurelyDelBook(false)
                 
-                setIsLoading(false)
+                params.setIsLoading(false)
             })
         }
 
-        setCount(prevCount => prevCount +1)
+        params.setCount(prevCount => prevCount +1)
         
         
     })

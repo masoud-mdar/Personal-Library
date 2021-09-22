@@ -1,21 +1,21 @@
-const allBooksFunc = (setIsLoading, axios, BASE_URL, setAllBooksList) => {
-    setIsLoading(true)
-    axios.get(`${BASE_URL}/api/books`).then(response => {
+const allBooksFunc = (params) => {
+    params.setIsLoading(true)
+    params.axios.get(`${params.BASE_URL}/api/books`).then(response => {
         const {data} = response
-        console.log(data)
+        //console.log(data)
         if (data.hasOwnProperty("error")) {
-            console.log(data)
+            //console.log(data)
         } else {
-            console.log(data.length)
+            //console.log(data.length)
             let tempArr = data.map(book => {
                 return {title: book.title, _id: book._id}
             })
 
 
-            setAllBooksList(tempArr)
+            params.setAllBooksList(tempArr)
         }
 
-        setIsLoading(false)
+        params.setIsLoading(false)
         
     })
 }

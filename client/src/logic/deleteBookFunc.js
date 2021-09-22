@@ -1,9 +1,9 @@
-const deleteBookFunc = (setIsSurelyDelete, setIsSurelyDelBook, setIsAddComment, setIsEditComment, setIsAddNewBook) => {
-    setIsSurelyDelete(true)
-    setIsSurelyDelBook(true)
-    setIsAddComment(false)
-    setIsEditComment(false)
-    setIsAddNewBook(false)
+const deleteBookFunc = (params) => {
+    params.setIsSurelyDelete(true)
+    params.setIsSurelyDelBook(true)
+    params.setIsAddComment(false)
+    params.setIsEditComment(false)
+    params.setIsAddNewBook(false)
 }
 
 export default deleteBookFunc

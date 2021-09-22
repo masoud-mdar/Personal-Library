@@ -1,51 +1,51 @@
-const surelyDeleteFunc = (setIsLoading, setIsAddNewBook, isSurelyDelBook, axios, BASE_URL, selectedBookId, setIsSurelyDelete, setIsSurelyDelBook, setCount, setSelectedBook, setSelectedBookComments, setSelectedBookId, setMoreDetails, setCommentMoreDetails, setIsAddComment, setIsEditComment, isSurelyDelComment, selectedBookComments, selectedCommentId, setSelectedCommentId, setSelectedComment, setIsSurelyDelComment, selectedBook, swal) => {
-    setIsLoading(true)
-    setIsAddNewBook(false)
+const surelyDeleteFunc = (params) => {
+    params.setIsLoading(true)
+    params.setIsAddNewBook(false)
 
-    if (isSurelyDelBook) {
+    if (params.isSurelyDelBook) {
 
-        axios.delete(`${BASE_URL}/api/books/${selectedBookId}`, {data:{}}).then(response => {
+        params.axios.delete(`${params.BASE_URL}/api/books/${params.selectedBookId}`, {data:{}}).then(response => {
             const {data} = response
 
             if (data.hasOwnProperty("error")) {
-                swal.fire({
+                params.swal.fire({
                     icon: "error",
                     title: "Error!",
                     text: `${data.error}`
                 })
             } else {
-                swal.fire(`${selectedBookId}`, `${selectedBook.title} deleted successfully`, "success").then(
+                params.swal.fire(`${params.selectedBookId}`, `${sparams.electedBook.title} deleted successfully`, "success").then(
                     (result) => {
                       if (result.isConfirmed || result.isDismissed) {
 
-                        setIsSurelyDelete(false)
-                        setIsSurelyDelBook(false)
-                        setCount(prevCount => prevCount + 1)
-                        setSelectedBook({})
-                        setSelectedBookComments([])
-                        setSelectedBookId("")
-                        setMoreDetails(false)
-                        setCommentMoreDetails(false)
-                        setIsAddComment(false)
-                        setIsEditComment(false)
+                        params.setIsSurelyDelete(false)
+                        params.setIsSurelyDelBook(false)
+                        params.setCount(prevCount => prevCount + 1)
+                        params.setSelectedBook({})
+                        params.setSelectedBookComments([])
+                        params.setSelectedBookId("")
+                        params.setMoreDetails(false)
+                        params.setCommentMoreDetails(false)
+                        params.setIsAddComment(false)
+                        params.setIsEditComment(false)
                       }
                     }
                 )
             }
 
-            setIsLoading(false)
+            params.setIsLoading(false)
 
         })
 
-    } else if (isSurelyDelComment) {
-        setIsLoading(true)
+    } else if (params.isSurelyDelComment) {
+        params.setIsLoading(true)
 
-        let tempAllCommentsArr = JSON.parse(JSON.stringify(selectedBookComments))
+        let tempAllCommentsArr = JSON.parse(JSON.stringify(params.selectedBookComments))
 
         let index
 
         for (let i=0; i<tempAllCommentsArr.length; i++) {
-            if (tempAllCommentsArr[i].commentId === selectedCommentId) {
+            if (tempAllCommentsArr[i].commentId === params.selectedCommentId) {
                 index = i
             }
         }
@@ -57,31 +57,31 @@ const surelyDeleteFunc = (setIsLoading, setIsAddNewBook, isSurelyDelBook, axios,
             comments: tempAllCommentsArr
         }
 
-        setSelectedBook("")
-        setSelectedCommentId("")
-        setSelectedBookComments([])
-        setCommentMoreDetails(false)
-        setSelectedComment({})
+        params.setSelectedBook("")
+        params.setSelectedCommentId("")
+        params.setSelectedBookComments([])
+        params.setCommentMoreDetails(false)
+        params.setSelectedComment({})
 
-        axios.put(`${BASE_URL}/api/books/${selectedBookId}`, sendingData).then(response => {
+        params.axios.put(`${params.BASE_URL}/api/books/${params.selectedBookId}`, sendingData).then(response => {
             const {data} = response
-            setSelectedBookId("")
+            params.setSelectedBookId("")
 
-            axios.get(`${BASE_URL}/api/books/${data._id}`).then(response => {
+            params.axios.get(`${params.BASE_URL}/api/books/${data._id}`).then(response => {
                 const {data} = response
-                console.log(data)
+                //console.log(data)
 
                 //console.log(tempArr)
 
-                setSelectedBook(data)
-                setSelectedBookId(data._id)
-                setSelectedBookComments(data.comments)
+                params.setSelectedBook(data)
+                params.setSelectedBookId(data._id)
+                params.setSelectedBookComments(data.comments)
 
-                setIsAddComment(false)
-                setIsEditComment(false)
-                setIsSurelyDelComment(false)
-                setIsSurelyDelete(false)
-                setIsLoading(false)
+                params.setIsAddComment(false)
+                params.setIsEditComment(false)
+                params.setIsSurelyDelComment(false)
+                params.setIsSurelyDelete(false)
+                params.setIsLoading(false)
             })
             
 
@@ -92,25 +92,25 @@ const surelyDeleteFunc = (setIsLoading, setIsAddNewBook, isSurelyDelBook, axios,
 
     } else {
 
-        axios.delete(`${BASE_URL}/api/books`, {data:{}}).then(response => {
+        params.axios.delete(`${params.BASE_URL}/api/books`, {data:{}}).then(response => {
             const {data} = response
 
             if (data.hasOwnProperty("error")) {
-                console.log(data)
+                //console.log(data)
             } else {
-                console.log(data)
+                //console.log(data)
             }
 
-            setIsSurelyDelete(false)
-            setCount(prevCount => prevCount + 1)
-            setSelectedBook("")
-            setSelectedBookComments([])
-            setSelectedBookId("")
-            setMoreDetails(false)
-            setCommentMoreDetails(false)
-            setIsAddComment(false)
-            setIsEditComment(false)
-            setIsLoading(false)
+            params.setIsSurelyDelete(false)
+            params.setCount(prevCount => prevCount + 1)
+            params.setSelectedBook("")
+            params.setSelectedBookComments([])
+            params.setSelectedBookId("")
+            params.setMoreDetails(false)
+            params.setCommentMoreDetails(false)
+            params.setIsAddComment(false)
+            params.setIsEditComment(false)
+            params.setIsLoading(false)
 
         })
     }

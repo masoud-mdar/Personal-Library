@@ -1,8 +1,8 @@
-const editCommentFunc = (setIsEditComment, setIsAddComment, setIsAddNewBook, setEditCommentInput, selectedComment) => {
-    setIsEditComment(true)
-    setIsAddComment(false)
-    setIsAddNewBook(false)
-    setEditCommentInput(selectedComment.commentText)
+const editCommentFunc = (params) => {
+    params.setIsEditComment(true)
+    params.setIsAddComment(false)
+    params.setIsAddNewBook(false)
+    params.setEditCommentInput(params.selectedComment.commentText)
 }
 
 export default editCommentFunc

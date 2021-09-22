@@ -1,12 +1,12 @@
-const submitNewCommentFunc = (setIsLoading, setIsEditComment, newCommentInput, user, axios, BASE_URL, selectedBookId, setIsAddComment, setCount, setNewCommentInput, setMoreDetails, setCommentMoreDetails, setSelectedBook, setSelectedBookComments, isEditComment, setSelectedComment, setSelectedCommentId, setIsShowComments, editCommentInput, selectedComment, selectedBookComments, selectedCommentId, setEditCommentInput, setSelectedBookId) => {
-    setIsLoading(true)
+const submitNewCommentFunc = (params) => {
+    params.setIsLoading(true)
 
-    if (!isEditComment) {
+    if (!params.isEditComment) {
 
         const sendingData = {
             comment: {
-                commentText: newCommentInput,
-                commentAuthor: user,
+                commentText: params.newCommentInput,
+                commentAuthor: params.user,
                 commentId: (Math.random() + 10 * Math.random() + 10).toString(),
                 agreed_by: [],
                 disagreed_by: [],
@@ -15,76 +15,76 @@ const submitNewCommentFunc = (setIsLoading, setIsEditComment, newCommentInput, u
             }
         }
 
-        axios.post(`${BASE_URL}/api/books/${selectedBookId}`, sendingData).then(response => {
+        params.axios.post(`${params.BASE_URL}/api/books/${params.selectedBookId}`, sendingData).then(response => {
             const {data} = response
 
             if (data.hasOwnProperty("error")) {
-                console.log(data)
+                //console.log(data)
             } else {
                 //alert comment submitted
-                console.log(data)
+                //console.log(data)
             }
 
-            setIsAddComment(false)
-            setCount(prevCount => prevCount + 1)
-            setNewCommentInput("")
-            setMoreDetails(false)
-            setCommentMoreDetails(false)
+            params.setIsAddComment(false)
+            params.setCount(prevCount => prevCount + 1)
+            params.setNewCommentInput("")
+            params.setMoreDetails(false)
+            params.setCommentMoreDetails(false)
             
         })
 
-        setSelectedBook("")
-        setSelectedBookComments([])
+        params.setSelectedBook("")
+        params.setSelectedBookComments([])
 
-        axios.get(`${BASE_URL}/api/books/${selectedBookId}`).then(response => {
+        params.axios.get(`${params.BASE_URL}/api/books/${params.selectedBookId}`).then(response => {
             const {data} = response
 
             if (data.hasOwnProperty("error")) {
-                console.log(data)
+                //console.log(data)
             } else {
-                setSelectedBook(data)
-                setSelectedBookComments(data.comments)
-                setMoreDetails(true)
-                setSelectedComment(data.comments[data.comments.length-1])
-                setSelectedCommentId(data.comments[data.comments.length-1].commentId)
-                setCommentMoreDetails(true)
-                setIsShowComments(true)
-                setIsLoading(false)
+                params.setSelectedBook(data)
+                params.setSelectedBookComments(data.comments)
+                params.setMoreDetails(true)
+                params.setSelectedComment(data.comments[data.comments.length-1])
+                params.setSelectedCommentId(data.comments[data.comments.length-1].commentId)
+                params.setCommentMoreDetails(true)
+                params.setIsShowComments(true)
+                params.setIsLoading(false)
             }
         })
 
 
-    } else if (isEditComment) {
+    } else if (params.isEditComment) {
 
         // axios.put for updating comment
 
         let tempCommentArr = {
-            commentText: editCommentInput,
-            commentAuthor: selectedComment.commentAuthor,
-            commentId: selectedComment.commentId,
+            commentText: params.editCommentInput,
+            commentAuthor: params.selectedComment.commentAuthor,
+            commentId: params.selectedComment.commentId,
             agreed_by: [],
             disagreed_by: [],
-            agreed_by_me: selectedComment.agreed_by_me,
-            disagreed_by_me: selectedComment.disagreed_by_me
+            agreed_by_me: params.selectedComment.agreed_by_me,
+            disagreed_by_me: params.selectedComment.disagreed_by_me
         }
 
-        let agrTempArr = selectedComment.agreed_by.map(item => {
+        let agrTempArr = params.selectedComment.agreed_by.map(item => {
             return item
         })
 
-        let disgTempArr = selectedComment.disagreed_by.map(item => {
+        let disgTempArr = params.selectedComment.disagreed_by.map(item => {
             return item
         })
 
         tempCommentArr.agreed_by = agrTempArr
         tempCommentArr.disagreed_by = disgTempArr
 
-        let tempAllCommentsArr = JSON.parse(JSON.stringify(selectedBookComments))
+        let tempAllCommentsArr = JSON.parse(JSON.stringify(params.selectedBookComments))
 
         let index
 
         for (let i=0; i<tempAllCommentsArr.length; i++) {
-            if (tempAllCommentsArr[i].commentId === selectedCommentId) {
+            if (tempAllCommentsArr[i].commentId === params.selectedCommentId) {
                 index = i
             }
         }
@@ -95,36 +95,36 @@ const submitNewCommentFunc = (setIsLoading, setIsEditComment, newCommentInput, u
             comments: tempAllCommentsArr
         }
 
-        setSelectedBook("")
-        setSelectedBookComments([])
-        setCommentMoreDetails(false)
-        setSelectedComment({})
-        setEditCommentInput("")
+        params.setSelectedBook("")
+        params.setSelectedBookComments([])
+        params.setCommentMoreDetails(false)
+        params.setSelectedComment({})
+        params.setEditCommentInput("")
 
-        axios.put(`${BASE_URL}/api/books/${selectedBookId}`, sendingData).then(response => {
+        params.axios.put(`${params.BASE_URL}/api/books/${params.selectedBookId}`, sendingData).then(response => {
             const {data} = response
-            setSelectedBookId("")
+            params.setSelectedBookId("")
 
-            axios.get(`${BASE_URL}/api/books/${data._id}`).then(response => {
+            params.axios.get(`${params.BASE_URL}/api/books/${data._id}`).then(response => {
                 const {data} = response
-                console.log(data)
+                //console.log(data)
 
                 let tempArr = data.comments.filter(item => {
-                    if (item.commentId === selectedCommentId) {
+                    if (item.commentId === params.selectedCommentId) {
                         return true
                     } else {
                         return false
                     }
                 })
 
-                setSelectedBook(data)
-                setSelectedBookId(data._id)
-                setSelectedBookComments(data.comments)
-                setCommentMoreDetails(true)
-                setSelectedComment(tempArr[0])
-                setIsEditComment(false)
-                setIsAddComment(false)
-                setIsLoading(false)
+                params.setSelectedBook(data)
+                params.setSelectedBookId(data._id)
+                params.setSelectedBookComments(data.comments)
+                params.setCommentMoreDetails(true)
+                params.setSelectedComment(tempArr[0])
+                params.setIsEditComment(false)
+                params.setIsAddComment(false)
+                params.setIsLoading(false)
             })
             
         })

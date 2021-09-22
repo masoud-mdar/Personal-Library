@@ -1,12 +1,13 @@
-const deleteCommentFunc = (id, setSelectedCommentId, setIsSurelyDelComment, setIsAddComment, setIsEditComment, setIsAddNewBook, setIsSurelyDelBook, setIsSurelyDelete) => {
-    setSelectedCommentId(id)
-    setIsSurelyDelComment(true)
+const deleteCommentFunc = (params, id) => {
+    
+    params.setSelectedCommentId(id)
+    params.setIsSurelyDelComment(true)
 
-    setIsAddComment(false)
-    setIsEditComment(false)
-    setIsAddNewBook(false)
-    setIsSurelyDelBook(false)
-    setIsSurelyDelete(true)
+    params.setIsAddComment(false)
+    params.setIsEditComment(false)
+    params.setIsAddNewBook(false)
+    params.setIsSurelyDelBook(false)
+    params.setIsSurelyDelete(true)
 }
 
 export default deleteCommentFunc
